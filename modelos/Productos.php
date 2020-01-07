@@ -24,24 +24,35 @@
         }
 
           
-      //método para seleccionar registros
+//método para seleccionar aros
 
-      public function get_productos_aros(){
+public function get_productos_aros(){
 
-           $conectar= parent::conexion();
-       
-          $sql= "select*from producto where categoria = 'aros' order by id_producto DESC";
+  $conectar= parent::conexion();       
+  $sql= "select*from producto where categoria = 'aros' order by id_producto DESC";
+  $sql=$conectar->prepare($sql);
 
-           $sql=$conectar->prepare($sql);
+  $sql->execute();
 
-           $sql->execute();
-
-           return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-
+  return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
          
-         }
+}
 
-          //método para seleccionar registros
+//método para seleccionar ACCESORIOS
+
+public function get_accesorios(){
+
+  $conectar= parent::conexion();       
+  $sql= "select*from producto where categoria = 'accesorios' order by id_producto DESC";
+  $sql=$conectar->prepare($sql);
+
+  $sql->execute();
+
+  return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+         
+}
+
+//método para seleccionar registros
 
       public function get_productos_ventas(){
 

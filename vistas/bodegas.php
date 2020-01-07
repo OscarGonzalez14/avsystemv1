@@ -25,6 +25,7 @@
 </head>
 <body>
 <?php require_once("modal/lista_productos_bodega.php");?>
+<?php require_once("modal/lista_acc_bodegas.php");?>
 <div id="tabla-planes">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -38,7 +39,7 @@
       <div class="table-plan" id="sa">
         <br>
           <a class="show_bdsa" data-toggle="modal" data-target="#lista_productos_bodegas_Modal">Ingresar Productos</a>
-          <a>Ingresar Accesorios</a>
+          <a class="show_bdsa" data-toggle="modal" data-target="#lista_acc_bodegas_Modal">Ingresar Accesorios</a>
           <a>Historial de Ingresos</a>
       </div>
     </div>

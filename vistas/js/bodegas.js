@@ -1,9 +1,11 @@
  var tabla_en_bodegas;
+ var tabla_accesorios;
 
  //Función que se ejecuta al inicio
 function init(){
 	
 	listar_en_bodegas();
+	listar_acc_bodega();
 }
 
 function listar_en_bodegas(){
@@ -85,6 +87,86 @@ function listar_en_bodegas(){
 	}).DataTable();
 }
 
+function listar_acc_bodega(){
+
+	tabla_accesorios= $('#lista_acc_bodegas_data').dataTable(
+	{
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+	    buttons: [		          
+		            'copyHtml5',
+		            'excelHtml5',
+		            'csvHtml5',
+		            'pdf'
+		        ],
+		"ajax":
+				{
+					url: '../ajax/bodegas.php?op=listar_acc_en_bodegas',
+					type : "get",
+					dataType : "json",						
+					error: function(e){
+						console.log(e.responseText);	
+					}
+				},
+		"bDestroy": true,
+		"responsive": true,
+		"bInfo":true,
+		"iDisplayLength": 10,//Por cada 10 registros hace una paginación
+	    "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+	    
+	    "language": {
+ 
+			    "sProcessing":     "Procesando...",
+			 
+			    "sLengthMenu":     "Mostrar _MENU_ registros",
+			 
+			    "sZeroRecords":    "No se encontraron resultados",
+			 
+			    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+			 
+			    "sInfo":           "Mostrando un total de _TOTAL_ registros",
+			 
+			    "sInfoEmpty":      "Mostrando un total de 0 registros",
+			 
+			    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			 
+			    "sInfoPostFix":    "",
+			 
+			    "sSearch":         "Buscar:",
+			 
+			    "sUrl":            "",
+			 
+			    "sInfoThousands":  ",",
+			 
+			    "sLoadingRecords": "Cargando...",
+			 
+			    "oPaginate": {
+			 
+			        "sFirst":    "Primero",
+			 
+			        "sLast":     "Último",
+			 
+			        "sNext":     "Siguiente",
+			 
+			        "sPrevious": "Anterior"
+			 
+			    },
+			 
+			    "oAria": {
+			 
+			        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+			 
+			        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			 
+			    }
+
+			   }//cerrando language
+	       
+	}).DataTable();
+}
+
+
 var detalles = [];	
 function agregarDetalleBodega(id_producto){
 	$.ajax({
@@ -120,7 +202,7 @@ function agregarDetalleBodega(id_producto){
 
         else {
 
-        	bootbox.alert(data.error);
+        	alert(data.error);
         }
                   
     }//fin success		
@@ -143,6 +225,69 @@ function listarDetallesBodegas(){
 	$('#listIngresoSA').html(filas);
 
   }
+
+
+  var detalleacc = [];	
+	function agregarDetalle_accBodega(id_producto){
+	$.ajax({
+	url:"../ajax/bodegas.php?op=buscar_acces_bodega",
+	method:"POST",
+	data:{id_producto:id_producto},
+	cache: false,
+	dataType:"json",
+
+	success:function(data){                       
+        if(data.id_producto){
+			if (typeof data == "string"){
+				data = $.parseJSON(data);
+		}
+		console.log(data);
+		                
+		var obj = {
+			cantidad : 1,
+			codProd  :  id_producto,
+			marca    :  data.marca,
+			modelo    :  data.modelo			
+		};		                
+	
+	detalleacc.push(obj);
+	listarDetalles_acc_Bodegas();
+
+	$('#lista_acc_bodegas_Modal').modal("hide");
+
+	}//if validacion id_producto
+
+        else {
+
+        	alert(data.error);
+        }
+                  
+    }//fin success		
+
+	});//fin de ajax
+			
+}// fin de funcion
+
+
+////AGREGA DETALLE DE ACCESORIOS
+
+
+
+function listarDetalles_acc_Bodegas(){
+  	$('#listIngresoSA').html('');
+  	var filas = "";
+  	
+  	for(var i=0; i<detalleacc.length; i++){
+		            
+        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalleacc[i].modelo+" - Color: "+detalleacc[i].marca+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalleacc[i].cantidad+"'></tr>";
+		
+	}//cierre for
+
+	
+	$('#listIngresoSA').html(filas);
+
+  }
+
 
     function setCantidad(event, obj, idx){
   	event.preventDefault();
