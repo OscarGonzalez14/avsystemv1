@@ -498,18 +498,20 @@ public function agrega_detalle_warehouse(){
   foreach ($detalles as $k => $v) {
     $modelo = $v->modelo;
     $cantidad = $v->cantidad;
-    $ubicacionu = $v->ubicacionu;
+    //$ubicacionu = $v->ubicacionu;
     $codProd = $v->codProd;
     $sucursal = $_POST["sucursal"];
+    $ubicaciong = $_POST["ubicaciong"];
     //$id_producto = $_POST["id_producto"];
     //$id_usuario = $_POST["id_usuario"];
 
         
-      $sql3="select * from existencias where id_producto=? and bodega=?;";
+      $sql3="select * from existencias where id_producto=? and bodega=? and categoriaub=?;";
 
       $sql3=$conectar->prepare($sql3);
       $sql3->bindValue(1,$codProd);
       $sql3->bindValue(2,$sucursal);
+      $sql3->bindValue(3,$ubicaciong);
       $sql3->execute();
       $resultado = $sql3->fetchAll(PDO::FETCH_ASSOC);
       
@@ -527,12 +529,13 @@ public function agrega_detalle_warehouse(){
       $sql4 = "update existencias set                      
         stock=?
         where 
-        id_producto=? and bodega=?
+        id_producto=? and bodega=? and categoriaub=?
       ";
       $sql4 = $conectar->prepare($sql4);
       $sql4->bindValue(1,$cantidad_total);
       $sql4->bindValue(2,$codProd);
       $sql4->bindValue(3,$sucursal);
+      $sql4->bindValue(4,$ubicaciong);
       $sql4->execute();
       }
 
@@ -546,7 +549,7 @@ public function agrega_detalle_warehouse(){
         $sql->bindValue(1,$codProd);
         $sql->bindValue(2,$cantidad);
         $sql->bindValue(3,$sucursal);
-        $sql->bindValue(4,$ubicacionu);
+        $sql->bindValue(4,$ubicaciong);
         $sql->execute();
     } //cierre la condicional
   }//cierre del foreach

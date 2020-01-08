@@ -189,8 +189,8 @@ function agregarDetalleBodega(id_producto){
 			stock    : data.stock,
 			color : data.color,
 			medidas : data.medidas,
-			modelo	 : data.modelo,
-			ubicacionu: data.categoriau
+			modelo	 : data.modelo
+			//ubicacionu: data.categoriau
 		};		                
 	
 	detalles.push(obj);
@@ -217,7 +217,7 @@ function listarDetallesBodegas(){
   	
   	for(var i=0; i<detalles.length; i++){
 		            
-        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalles[i].modelo+" - Color: "+detalles[i].color+" - Medidas: "+detalles[i].medidas+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'></td> <td><i class='fa fa-trash fa-2x' style='color: red' aria-hidden='true' onclick='deleteRow(this)'></i></td> <td> <input type='hidden' name='cod_prod' id='cod_prod' value='"+detalles[i].codProd+"'></td><td><input type='hidden' name='ubicacionu[]' id='ubicacionu[]' value='"+detalles[i].ubicacionu+"'></td></tr>";
+        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalles[i].modelo+" - Color: "+detalles[i].color+" - Medidas: "+detalles[i].medidas+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'></td> <td><i class='fa fa-trash fa-2x' style='color: red' aria-hidden='true' onclick='deleteRow(this)'></i></td> <td> <input type='hidden' name='cod_prod' id='cod_prod' value='"+detalles[i].codProd+"'></td></tr>";
 		
 	}//cierre for
 
@@ -227,7 +227,7 @@ function listarDetallesBodegas(){
   }
 
 
-  var detalleacc = [];	
+  var detalles= [];	
 	function agregarDetalle_accBodega(id_producto){
 	$.ajax({
 	url:"../ajax/bodegas.php?op=buscar_acces_bodega",
@@ -247,10 +247,10 @@ function listarDetallesBodegas(){
 			cantidad : 1,
 			codProd  :  id_producto,
 			marca    :  data.marca,
-			modelo    :  data.modelo			
+			modelo   :  data.modelo			
 		};		                
 	
-	detalleacc.push(obj);
+	detalles.push(obj);
 	listarDetalles_acc_Bodegas();
 
 	$('#lista_acc_bodegas_Modal').modal("hide");
@@ -277,9 +277,9 @@ function listarDetalles_acc_Bodegas(){
   	$('#listIngresoSA').html('');
   	var filas = "";
   	
-  	for(var i=0; i<detalleacc.length; i++){
+  	for(var i=0; i<detalles.length; i++){
 		            
-        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalleacc[i].modelo+" - Color: "+detalleacc[i].marca+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalleacc[i].cantidad+"'></tr>";
+        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalles[i].modelo+" - Marca: "+detalles[i].marca+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td> <input type='hidden' name='cod_prod' id='cod_prod' value='"+detalles[i].codProd+"'></td></tr>";
 		
 	}//cierre for
 
@@ -311,13 +311,14 @@ function updateBodega(){
 
     var sucursal = $("#sucursal").val();
     var id_producto =$('#cod_prod').val();
+    var ubicaciong =$('#ubicaciong').val();
 
-    if(sucursal!=""){
+    if(sucursal!="" || ubicaciong != ""){
     console.log('error.Oscar');
     $.ajax({
 		url:"../ajax/producto.php?op=update_warehouse",
 		method:"POST",
-		data:{'arrayIngreso':JSON.stringify(detalles),'sucursal':sucursal, 'id_producto':id_producto},
+		data:{'arrayIngreso':JSON.stringify(detalles),'sucursal':sucursal, 'id_producto':id_producto,'ubicaciong':ubicaciong},
 		cache: false,
 		dataType:"html",
 		error:function(x,y,z){
