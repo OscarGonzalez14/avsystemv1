@@ -132,9 +132,9 @@
 
   	case 'tipo_pago';
 
-	if ($_POST['id_tipo']=='Contado-Metrocentro') {
+	if ($_POST['id_tipo']=='Contado') {
 		$html="
-			<option value=''>Seleccione</option>
+			<option value='prueba'>Seleccione</option>
 			<option value='Efectivo'>Efectivo</option>
 			<option value='Tarjeta de Credito'>Tarjeta de Crédito</option>			
 			<option value='Cheque'>Cheque</option>";
@@ -144,7 +144,7 @@
 	}elseif($_POST['id_tipo']=='Credito'){
 	
 	$html= "
-		<option value=''>Selecione</option>
+		<option value='prueba'>Selecione</option>
 		<option value='Descuento en Planilla'> Descuento en Planilla</option>
 	 	<option value='Cargo Automatico'>Cargo Automático</option>
 	 	<option value='Creditos Personales'>Créditos Personales</option>
@@ -154,7 +154,7 @@
 		echo $html;
 		}else{
 
-	$html= "<option value=''>Seleccione</option>
+	$html= "<option value='prueba'>Seleccione</option>
 	";
 	
 		echo $html;
@@ -168,7 +168,7 @@
 
   		$html="
 
-			<option value=''>Seleccione</>
+			<option value='prueba'>Seleccione</>
 			<option value='2'> 2 Meses</>
 			<option value='3'> 3 Meses</>
 			<option value='4'> 4 Meses</>
@@ -189,7 +189,7 @@
 
   		$html="
 
-			<option value=''>Seleccione</>
+			<option value='prueba'>Seleccione</>
 			<option value='3'> 3 Meses</>
 			<option value='6'> 6 Meses</>
 			<option value='9'> 9 Meses</>
@@ -202,7 +202,7 @@
   		}else if($_POST['m_cuotas']=='Creditos Personales'){
 
   			$html="
-			<option value=''>Seleccione</>
+			<option value='prueba'>Seleccione</>
 			<option value='1'> 1 Meses</>
 			<option value='2'> 2 Meses</>
 			<option value='3'> 3 Meses</>

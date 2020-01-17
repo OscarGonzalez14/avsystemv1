@@ -560,7 +560,7 @@ public function get_existencias(){
 
   $conectar= parent::conexion();
        
-  $sql= "select p.id_producto,p.modelo, p.marca,p.medidas,p.color, e.stock,e.bodega,e.categoriaub from producto as p inner join existencias as e on p.id_producto=e.id_producto order by p.id_producto ASC;
+  $sql= "select p.id_producto,p.modelo, p.marca,p.medidas,p.color, e.stock,e.bodega,e.categoriaub, e.id_ingreso from producto as p inner join existencias as e on p.id_producto=e.id_producto order by e.id_ingreso DESC;
 ";
 
       $sql=$conectar->prepare($sql);

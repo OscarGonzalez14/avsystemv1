@@ -72,17 +72,8 @@
 
     <?php require_once("modal/abono_inicial.php");?>
   <div>
-      <nav class="navbar navbar-inverse">
-
-      <ul class="nav navbar-nav">
-          <li class="active"><a href="#">MODULO DE VENTAS</a></li>
-          <li><a href="#">Creditos y Pagos</a></li>
-          <li><a href="consultar_ventas.php">Reportes General de Ventas</a></li>
-
-      </ul>
-      </div>
-    </nav>        
-<div id="factheader"><h4 align="center">Factura de Consumidor Final</h4></div>
+      <       
+<div id="factheader"><h3 align="center">COTIZACIONES</h3></div>
 <div class="row"><!--Row 1-->
   <div class="col-sm-1"></div>
   <div class="col-sm-10 row1">
@@ -92,7 +83,7 @@
     <div class="form-group row">
 
       <div class="col-xs-3">
-        <label for="ex1">#Venta</label>
+        <label for="ex1">#Cotizacion</label>
         <input class="form-control" id="numero_venta" name="numero_venta" type="text" value="<?php $codigo=$venta->numero_venta();?>"  readonly>
       </div>
 
@@ -120,18 +111,20 @@
 </div><!--Fin row 1-->
 
 
-<div class="row"><!--Row 2-->
+<div class="row" style='visibility: hidden;'><!--Row 2-->
   <div class="col-sm-1"></div>
   <div class="col-sm-10 row2">
 
     <div class="form-group row">
 
       <div class="col-xs-2">
-      <label for="sel1">Tipo de Venta:</label>
+      <label for="sel1">Tipo de Cotizacion:</label>
         <select class="form-control" id="tipo_venta" name="tipo_venta">
             <option value="">Seleccione</option>
-            <option value="Credito">Crédito</option>
-            <option value="Contado">Contado</option>
+          
+            <option value="Contado">Metrocentro</option>
+              <option value="Credito">aseguradora</option>
+            <option value="Contado">Empresarial</option>
         </select>
       </div>
 
@@ -165,7 +158,7 @@
     <div class="col-xs-3">
       <label for="sel1">Sucursal:</label>                
       <select class="form-control" name="sucursal" id="sucursal" required>
-          <option  value="">Seleccione una sucursal</option>
+          <option  value="Metrocentro">Seleccione una sucursal</option>
           <option  value="Metrocentro">Metrocentro</option>
           <option  value="Santa Ana">Santa Ana</option>                     
       </select>
@@ -265,8 +258,8 @@
 <input type="hidden" name="id_paciente" id="id_paciente"/>                
   </table>
  <div class="boton_registrar">
-<button type="button" onClick="registrarCotizacion()" class="btn btn-blue pull-right btn-block" id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Cotizar</button>
-
+<button type="button" onClick="registrarVenta()" class="btn btn-blue pull-right btn-block" id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Venta</button>
+<button type="button" class="btn btn-dark pull-right btn-block abono_ini" onClick="abono_inicial()"><i class="fa fa-save" aria-hidden="true"></i>  Abono Inicial</button>
 </div>
 
     </div> 

@@ -251,8 +251,6 @@
    	 // }
 
 
-
-
 	//prueba mensaje de success
 
      if (isset($messages)){

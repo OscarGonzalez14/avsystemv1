@@ -279,7 +279,7 @@ function listarDetalles_acc_Bodegas(){
   	
   	for(var i=0; i<detalles.length; i++){
 		            
-        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalles[i].modelo+" - Marca: "+detalles[i].marca+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td> <input type='hidden' name='cod_prod' id='cod_prod' value='"+detalles[i].codProd+"'></td></tr>";
+        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalles[i].modelo+" - Marca: "+detalles[i].marca+"</td><td><input type='number' class='cantidad input-group-sm' name='Ycantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td> <input type='hidden' name='cod_prod' id='cod_prod' value='"+detalles[i].codProd+"'></td></tr>";
 		
 	}//cierre for
 
@@ -356,6 +356,8 @@ function updateBodega(){
 
 	    location.reload();
 }
+
+
 
 
  init();  	

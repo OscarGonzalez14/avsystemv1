@@ -115,4 +115,30 @@ footer a, footer a:hover{
     color: white;
   }
 
+  .navbar-inverse{
+    border: 1px;
+
+}
+
+.row1{
+
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  background: white;
+
+}
+
+.row2{
+
+  background: #E0E0E0;
+
+}
+
+#line1{
+
+  background: black;
+
+}
+
  
