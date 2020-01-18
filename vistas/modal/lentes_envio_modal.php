@@ -34,6 +34,7 @@
                
                 <thead>
                   <tr>
+                  <th class="all">idProd.</th>
                     <th class="all">Modelo</th>
                     <th class="all">Marca</th>
                     <th class="min-desktop">Color</th>

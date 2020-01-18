@@ -129,7 +129,8 @@ case "listar_acc_en_bodegas":
 
 		if ($_POST['id_tipo']=='Metrocentro') {
 			$html="
-		<option value='Gav#14 ANDVAS TODO COLOR'>Gav#14 ANDVAS TODO COLOR</option>	
+		<option value='Gav#24'>Gav#24</option>	
+		<option value='Caja#2'>Caja#2</option>	
 		<option value='GAVETA ACCESORIOS'>GAVETA ACCESORIOS</option>
         <option value='MU#37 RAY BAN ACETATO METALICO#12'>MU#37 RAY BAN ACETATO METALICO#12</option>			
 		<option value='MU#37 RAY BAN ACETATO#11'>MU#37 RAY BAN ACETATO#11</option>

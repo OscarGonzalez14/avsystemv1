@@ -16,7 +16,10 @@
 <?php if($_SESSION["productos"]==1)
 { ?>
    
-<div class="content-wrapper">        
+
+
+<div class="content-wrapper">
+  <?php require_once("modal/lentes_envio_modal.php");?>        
   <h3 align="center">CONTROL DE MOVIMIENTO DE PRODUCTOS</h3>
   
   <div class="row"><!--ROW 1-->
@@ -51,14 +54,14 @@
       </div>
 
       <div class="col-xs-3">         
-      <label for="sucursal">Origen</label>
+      <label for="ub_origen">Origen</label>
       <select id="ub_origen" name="ub_origen"  class="form-control form-control-success  ubicaciones">
       </select>    
       </div>
 
       <div class="col-xs-3">         
-      <label for="sucursal">Destino</label>
-      <select name="ub_destino"  class="form-control form-control-success  ubicaciones">
+      <label for="ub_destino">Destino</label>
+      <select name="ub_destino" id='ub_destino' class="form-control form-control-success  ubicaciones">
       </select>    
       </div>
 
@@ -95,18 +98,15 @@
         <th colspan="4">Descripcion</th>
         <th colspan="2">Cantidad</th>
       </tr>
-    </thead>
-                  
-  <tbody id="listProdEnvios"></tbody>
-
-          
-<input type="hidden" name="grabar" value="si">
+    </thead>                  
+  <tbody id="listProdEnvios"></tbody>          
+<input type="hidden" name="tipo_traslado" value="interno">
 <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
 <input type="hidden" name="usuario" id="usuario" value="<?php echo $_SESSION["usuario"];?>"/>
                
   </table>
  <div class="boton_registrar">
-<button type="button" onClick="registrarIngreso()" class="btn btn-dark pull-right btn-block" id="btn_enviar"><span class="glyphicon glyphicon-share-alt">  Realizar Envío</button>
+<button type="button" onClick="registrarTraslados()" class="btn btn-dark pull-right btn-block" id="btn_enviar"><span class="glyphicon glyphicon-share-alt">  Realizar Traslado</button>
 
 </div>
 
@@ -143,7 +143,7 @@ document.getElementById("date").innerHTML = d + "/" + m + "/" + y+" "+h;
 
 <!--AJAX PRODUCTOS-->
 <script type="text/javascript" src="js/envios.js"></script>
-<script type="text/javascript" src="js/productos.js"></script>
+
 
 <?php
    

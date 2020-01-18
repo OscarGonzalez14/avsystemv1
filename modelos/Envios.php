@@ -87,129 +87,117 @@ require_once("../config/conexion.php");
 
 public function agrega_detalle_ingreso(){
        
-  //echo json_encode($_POST['arrayCompra']);
   $str = '';
   $detallesE = array();
   $detallesE = json_decode($_POST['arrayIngreso']);
    
-   $conectar=parent::conexion();
-  foreach ($detallesE as $k => $v) {
+  $conectar=parent::conexion();
+    foreach ($detallesE as $k => $v) {
   
     //IMPORTANTE:estas variables son del array detalles
     $cantidad = $v->cantidad;
     $codProd = $v->codProd;
     //$codCat = $v->codCat;
-    $modelo = $v->modelo;
-    $marca = $v->marca;
-    $color = $v->color;
     //$descripcion = $v->descripcion; 
-     $sucursal_origen = $_POST["sucursal_origen"];
-     $sucursal_destino = $_POST["sucursal_destino"];
-     $numero_envio = $_POST["numero_envio"];
-     $id_usuario = $_POST["id_usuario"];
-     //$id_proveedor = $_POST["id_proveedor"];
-        $sql="insert into detalle_envio
-        values(null,?,?,?,?,CURRENT_TIMESTAMP,?,?,?);";
+    $ub_origen = $_POST["ub_origen"];
+    $ub_destino = $_POST["ub_destino"];
+    $numero_envio = $_POST["numero_envio"];
+    $id_usuario = $_POST["id_usuario"];
+    $sucursal = $_POST["sucursal"];
+
+    $sql3="select * from existencias where id_producto=? and bodega=? and categoriaub=?;";            
+    $sql3=$conectar->prepare($sql3);
+    $sql3->bindValue(1,$codProd);
+    $sql3->bindValue(2,$sucursal);
+    $sql3->bindValue(3,$ub_destino);
+    $sql3->execute();
+    $resultado = $sql3->fetchAll(PDO::FETCH_ASSOC);
+
+    if(is_array($resultado)==true and count($resultado)>0){
+      foreach($resultado as $b=>$row){
+      $re["existencia"] = $row["stock"];
+    }
+    //la cantidad total es la suma de la cantidad más la cantidad actual
+    $cantidad_total = $cantidad + $row["stock"];             
+    //si existe el producto entonces actualiza el stock en producto              
+    if(is_array($resultado)==true and count($resultado)>0) {                     
+                  //actualiza el stock en la tabla producto
+    $sql4 = "update existencias set                      
+      stock=?
+      where 
+      id_producto=?
+      and
+      bodega=?
+      and categoriaub=?
+    ";
+    $sql4 = $conectar->prepare($sql4);
+    $sql4->bindValue(1,$cantidad_total);
+    $sql4->bindValue(2,$codProd);
+    $sql4->bindValue(3,$sucursal);
+    $sql4->bindValue(4,$ub_destino);
+    $sql4->execute();
+}
+}else{
+
+  $sql="insert into existencias values (null,?,?,?,?);";
         $sql=$conectar->prepare($sql);
-        $sql->bindValue(1,$numero_envio);
-        $sql->bindValue(2,$codProd);
-        $sql->bindValue(3,$modelo);
-        $sql->bindValue(4,$cantidad);
-        $sql->bindValue(5,$sucursal_origen);
-        $sql->bindValue(6,$sucursal_destino);
-        $sql->bindValue(7,$id_usuario);
-        //$sql->bindValue(6,$categoria);       
-        $sql->execute();
-        
-             $sql3="select * from existencias where id_producto=? and id_bodega=?;";
-             //echo $sql3;
-             
-             $sql3=$conectar->prepare($sql3);
-             $sql3->bindValue(1,$codProd);
-             $sql3->bindValue(2,$sucursal_destino);
-             $sql3->execute();
-             $resultado = $sql3->fetchAll(PDO::FETCH_ASSOC);
-                  foreach($resultado as $b=>$row){
-                    $re["existencia"] = $row["stock"];
-                  }
-                //la cantidad total es la suma de la cantidad más la cantidad actual
-                $cantidad_total = $cantidad + $row["stock"];
-             
-               //si existe el producto entonces actualiza el stock en producto
-              
-               if(is_array($resultado)==true and count($resultado)>0) {
-                     
-                  //actualiza el stock en la tabla producto
-                 $sql4 = "update existencias set 
-                      
-                      stock=?
-                      where 
-                      id_producto=?
-                      and
-                      id_bodega=?
-                 ";
-                $sql4 = $conectar->prepare($sql4);
-                $sql4->bindValue(1,$cantidad_total);
-                $sql4->bindValue(2,$codProd);
-                $sql4->bindValue(3,$sucursal_destino);
-                $sql4->execute();
-               } //cierre la condicional*********FIN DE AGREGA SUDURSAL DESTINO
+
+        $sql->bindValue(1,$codProd);
+        $sql->bindValue(2,$cantidad);
+        $sql->bindValue(3,$sucursal);
+        $sql->bindValue(4,$ub_destino);
+        $sql->execute();//cierre la condicional*********FIN DE AGREGA SUDURSAL DESTINO
                ///INICIA UPDATE SUCURSAL ORIGEN
-            
-            $sql8="select * from existencias where id_producto=? and id_bodega=?;";
+ }
+  $sql5="select * from existencias where id_producto=? and bodega=? and categoriaub=?;";
              //echo $sql3;
              
-             $sql8=$conectar->prepare($sql8);
-             $sql8->bindValue(1,$codProd);
-             $sql8->bindValue(2,$sucursal_origen);
-             $sql8->execute();
-             $resultado = $sql8->fetchAll(PDO::FETCH_ASSOC);
+             $sql5=$conectar->prepare($sql5);
+             $sql5->bindValue(1,$codProd);
+             $sql5->bindValue(2,$sucursal);
+             $sql5->bindValue(3,$ub_origen);
+             $sql5->execute();
+             $resultado = $sql5->fetchAll(PDO::FETCH_ASSOC);
                   foreach($resultado as $b=>$row){
                     $re["existencia"] = $row["stock"];
                   }
                 //la cantidad total es la suma de la cantidad más la cantidad actual
-                $descuenta_producto = $row["stock"]-$cantidad;
+                $cantidad_total2 = $row["stock"]-$cantidad;
              
                //si existe el producto entonces actualiza el stock en producto
               
                if(is_array($resultado)==true and count($resultado)>0) {
                      
                   //actualiza el stock en la tabla producto
-                 $sql9 = "update existencias set 
+                 $sql6 = "update existencias set 
                       
                       stock=?
                       where 
                       id_producto=?
                       and
-                      id_bodega=?
+                      bodega=?
+                      and categoriaub=?
                  ";
-                $sql9 = $conectar->prepare($sql9);
-                $sql9->bindValue(1,$descuenta_producto);
-                $sql9->bindValue(2,$codProd);
-                $sql9->bindValue(3,$sucursal_origen);
-                $sql9->execute();
-               }
-       }//cierre del foreach
-           /*$sql2="insert into compras 
-           values(null,now(),?,?,?,?,?,?,?,?,?,?,?,?);";
-           $sql2=$conectar->prepare($sql2);
-           
-      
-           $sql2->bindValue(1,$numero_compra);
-           $sql2->bindValue(2,$proveedor);
-           $sql2->bindValue(3,$cedula_proveedor);
-           $sql2->bindValue(4,$comprador);
-           $sql2->bindValue(5,$moneda);
-           $sql2->bindValue(6,$subtotal);
-           $sql2->bindValue(7,$total_iva);
-           $sql2->bindValue(8,$total);
-           $sql2->bindValue(9,$tipo_pago);
-           $sql2->bindValue(10,$estado);
-           $sql2->bindValue(11,$id_usuario);
-           $sql2->bindValue(12,$id_proveedor);
-          
-           $sql2->execute();*/
-      }
+                $sql6 = $conectar->prepare($sql6);
+                $sql6->bindValue(1,$cantidad_total2);
+                $sql6->bindValue(2,$codProd);
+                $sql6->bindValue(3,$sucursal);
+                $sql6->bindValue(4,$ub_origen);
+                $sql6->execute();
+               } else{
+                $sql="insert into existencias values (?,?,?,?);";
+
+                $sql=$conectar->prepare($sql);
+                $sql->bindValue(1,$codProd);
+                $sql->bindValue(2,$cantidad);
+                $sql->bindValue(3,$sucursal);
+                $sql->bindValue(4,$ub_destino);
+                $sql->execute();
+               } //cierre la condicional*********FIN DE AGREGA SUDURSAL DESTINO
+
+    }
+}//cierre del foreach
+
 
 
       public function listar_requisiones(){
