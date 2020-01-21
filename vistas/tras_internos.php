@@ -21,7 +21,6 @@
 <div class="content-wrapper">
   <?php require_once("modal/lentes_envio_modal.php");?>        
   <h3 align="center">CONTROL DE MOVIMIENTO DE PRODUCTOS</h3>
-
 <br>
   <div class='row'>
     <div class='col-sm-1'></div>

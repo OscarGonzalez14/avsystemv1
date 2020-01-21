@@ -25,7 +25,7 @@
    $imagen = isset($_POST["hidden_producto_imagen"]);
    $descripcion=isset($_POST["descripcion"]);
    $categoriacc=isset($_POST["categoriacc"]);
-
+   $categoriau=isset($_POST["categoriau"]);
         
 
    switch($_GET["op"]){

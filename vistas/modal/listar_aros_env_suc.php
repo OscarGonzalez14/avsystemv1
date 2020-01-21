@@ -13,14 +13,14 @@
 
   </style>
 
-   <div class="modal fade" id="modalEnvios">
+   <div class="modal fade" id="envSucursal">
           <div class="modal-dialog" id="tamanoModal">
            <!--antes tenia un class="modal-content" y lo cambié por bg-warning para que tuviera fondo blanco, deberia haber sido un color naranja claro pero me salió un color blanco de casualidad--> 
             <div class="bg-info" id="info">
               <div class="modal-header" id="encabezados">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" align="center"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></i> Orden de Envio Aros</h4>
+                <h4 class="modal-title" align="center"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></i> Trasladar productos a Sucursal</h4>
               </div>
               <div class="modal-body">
 
@@ -30,7 +30,7 @@
         <div class="table-responsive">
          
              <div class="box-body">
-             <table id="lista_envios_data" class="table table-bordered table-striped">
+             <table id="envios_suc_data" class="table table-bordered table-striped">
                
                 <thead>
                   <tr>
@@ -42,8 +42,7 @@
                     <th class="min-desktop">Stock</th>
                    <th class="min-desktop">Bodega</th>
                    <th class="min-desktop">Ubicacion</th>
-                    <th class="min-desktop">Agregar</th>
-                   
+                  <th class="min-desktop">Agregar</th>                
                   
                   </tr>
                 </thead>

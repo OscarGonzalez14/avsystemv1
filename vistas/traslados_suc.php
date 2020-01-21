@@ -19,7 +19,7 @@
 
 
 <div class="content-wrapper">
-  <?php require_once("modal/lentes_envio_modal.php");?>        
+  <?php require_once("modal/listar_aros_env_suc.php");?>        
   <h3 align="center">CONTROL DE MOVIMIENTO DE PRODUCTOS</h3>
 
 <br>
@@ -35,26 +35,23 @@
       </div>
 
       <div class="col-xs-4">         
-      <label for="sucursal">Seleccionar Bodega</label>
-      <select id="sucursal" class="form-control form-control-success">
+      <label for="sucursal">Sucursal Origen</label>
+      <select id="suc_origen" name="suc_origen" class="form-control form-control-success">
         <option selected value="">Seleccionar</option>
         <option value="Metrocentro">Metrocentro</option>
         <option value="Santa Ana">Santa Ana</option>
      </select>    
       </div>
 
-      <div class="col-xs-3">         
-      <label for="ub_origen">Origen</label>
-      <select id="ub_origen" name="ub_origen"  class="form-control form-control-success  ubicaciones">
-      </select>    
+      <div class="col-xs-4">         
+      <label for="sucursal">Sucursal Destino</label>
+      <select id="suc_destino" name="suc_destino" class="form-control form-control-success">
+        <option selected value="">Seleccionar</option>
+        <option value="Metrocentro">Metrocentro</option>
+        <option value="Santa Ana">Santa Ana</option>
+     </select>    
       </div>
-
-      <div class="col-xs-3">         
-      <label for="ub_destino">Destino</label>
-      <select name="ub_destino" id='ub_destino' class="form-control form-control-success  ubicaciones">
-      </select>    
-      </div>
-
+      
       </div>
     </div><!--Fin row1-->
 <div class='col-sm-1'></div>
@@ -70,7 +67,7 @@
 
 <div class="col-xs-3">
    <label for="ex1">Trasladar Aros</label>
-   <button class="btn btn-dark btn-block pull-left" type="button" data-toggle="modal" data-target="#modalEnvios"><span class="glyphicon glyphicon-sunglasses"></span> Aros</button>
+   <button class="btn btn-dark btn-block pull-left" type="button" data-toggle="modal" data-target="#envSucursal"><span class="glyphicon glyphicon-sunglasses"></span> Aros</button>
 </div> 
 
 <div class="col-xs-3">
@@ -89,7 +86,7 @@
         <th colspan="2">Cantidad</th>
       </tr>
     </thead>                  
-  <tbody id="listProdEnvios"></tbody>          
+  <tbody id="listEnviosSucursal"></tbody>          
 <input type="hidden" name="tipo_traslado" value="interno">
 <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
 <input type="hidden" name="usuario" id="usuario" value="<?php echo $_SESSION["usuario"];?>"/>

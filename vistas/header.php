@@ -177,13 +177,15 @@
 
            echo ' 
 
-         <li class="">
+         <li class="treeview">
           <a href="productos.php">
             <i class="fa fa-tasks" aria-hidden="true"></i> <span>Inventario</span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="Bodegas.php"><i class="fa fa-circle-o"></i> Bodegas</a></li>
-          </ul
+           <ul class="treeview-menu">
+              <li><a href="productos.php"><i class="fa fa-circle-o" aria-hidden="true"></i> <span>Inventario</span></a></li>
+              <li><a href="envios.php"><i class="fa fa-tasks" aria-hidden="true"></i> <span>Envios</span></a></li>
+              <li><a href="bodegas.php"><i class="fa fa-circle-o" aria-hidden="true"></i> <span>Bodegas</span></a></li>
+            </ul>
          
         </li>';
 

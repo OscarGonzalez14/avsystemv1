@@ -136,7 +136,7 @@ public function get_accesorios(){
             parent::set_names();
 
             require_once("Productos.php");
-
+            
 
             $imagen_producto = new Producto();
 
@@ -172,25 +172,17 @@ public function get_accesorios(){
 
         }
 
-
-
          //obtiene el registro por id despues de editar
         public function get_producto_por_id($id_producto){
 
           $conectar= parent::conexion();
-
           //$output = array();
-
             $sql="select * from producto where id_producto=?";
-
             $sql=$conectar->prepare($sql);
-
             $sql->bindValue(1, $id_producto);
             $sql->execute();
 
             return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-
-
         }
 
         public function get_lente_por_id($id_lente){

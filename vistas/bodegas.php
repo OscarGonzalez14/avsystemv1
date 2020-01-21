@@ -68,7 +68,7 @@
       <label for="ubicacion">Ubicacion</label>
       <select id="ubicaciong" class="form-control form-control-success" style="border-color: #5bc0de; border: solid 2px #5bc0de">
         <option selected value="">Seleccionar Ubicacion</option>
-        <option value="Gav#24 METALICOS ECONOMICOS">Gav#24 METALICOS ECONOMICOS</option>
+        <option value="Gav#24">Gav#24</option>
         <option value="Caja 2">Caja 2</option>
     </select>
     </div>
@@ -81,7 +81,6 @@
         <th style="text-align: center; font-size:20px; font-family: 'Helvetica';">Item</th>
         <th style="text-align: center; font-size:20px; font-family: 'Helvetica';">Producto</th>
         <th style="text-align: center; font-size:20px; font-family: 'Helvetica';">Cantidad</th>
-        <th style="text-align: center; font-size:20px; font-family: 'Helvetica';">Eliminar</th>
       </tr>
     </thead>
 
@@ -95,11 +94,8 @@
 <button type="button" class="btn btn-primary btn-block" onclick="updateBodega()">Registrar Ingreso</button>
 </form>
 </div><!-- Fin Items Productos-->
-
-
 <br>
-<br>
-   
+<br>  
   <div class="row">
   <div class="col-sm-1"></div>
         <div class="col-sm-10">

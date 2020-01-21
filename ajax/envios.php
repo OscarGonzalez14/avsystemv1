@@ -10,43 +10,88 @@
 
 	switch ($_GET["op"]) {
 
-	case "listar_en_envios":
+	 case "listar_en_envios":
 
   $datos=$envio->get_productos_envio();
- 	$data= Array();
+  $data= Array();
     
     foreach($datos as $row)
-		{
-			$sub_array = array();
-				  $stock="";
-				  if($row["stock"]<=5){                      
+    {
+      $sub_array = array();
+          $stock="";
+          if($row["stock"]<=5){                      
             $stock = $row["stock"];
             $atributo = "badge bg-red-active";
                             
-			} else {
-				  $stock = $row["stock"];
+      } else {
+          $stock = $row["stock"];
           $atributo = "badge bg-green";
       }
 
-				//$sub_array = array();
+        //$sub_array = array();
       $sub_array[] = $row["id_producto"];
-				$sub_array[] = $row["modelo"];
-				$sub_array[] = $row["marca"];
-				$sub_array[] = $row["color"];
-				$sub_array[] = $row["medidas"];
-        $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'</span>';				
-               
-			$sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-dark btn-md " onClick="traslado_Aros('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agrega Envio</button>';              
-			$data[] = $sub_array;
-	}
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["color"];
+        $sub_array[] = $row["medidas"];
+        $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'</span>';        
+              $sub_array[] = $row["bodega"];
+              $sub_array[] = $row["categoriaub"];
+      $sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-dark btn-md " onClick="traslado_Aros('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agrega Envio</button>';              
+      $data[] = $sub_array;
+  }
 
 
       $results = array(
- 			"sEcho"=>1, //Información para el datatables
- 			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
- 			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
- 			"aaData"=>$data);
- 		echo json_encode($results);
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+
+
+     break;
+
+///****************LISTAR ENVIOS A SUCURSAL
+
+  case "listar_envios_sucursal":
+
+  $datos=$envio->get_productos_envio();
+  $data= Array();
+    
+    foreach($datos as $row)
+    {
+      $sub_array = array();
+          $stock="";
+          if($row["stock"]<=5){                      
+            $stock = $row["stock"];
+            $atributo = "badge bg-red-active";
+                            
+      } else {
+          $stock = $row["stock"];
+          $atributo = "badge bg-green";
+      }
+
+        //$sub_array = array();
+      $sub_array[] = $row["id_producto"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["color"];
+        $sub_array[] = $row["medidas"];
+        $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'</span>';        
+              $sub_array[] = $row["bodega"];
+              $sub_array[] = $row["categoriaub"];
+      $sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-dark btn-md " onClick="trasladosaSucursal('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agrega Envio</button>';              
+      $data[] = $sub_array;
+  }
+
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
 
 
      break;

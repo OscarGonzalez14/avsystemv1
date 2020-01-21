@@ -161,7 +161,7 @@
      <div class="col-xs-4">
         <label>Categoría</label>
     <select class="form-control" id="categoria-u" name="categoriau">
-    <option value="">-- categoría --</option>
+    <option value="null">-- categoría --</option>
     <option value="ME#28 ANDVAS ACETATO #15">ME#28 ANDVAS ACETATO #15</option>
     <option value="ME#28 ANDVAS ACETATO #14">ME#28 ANDVAS ACETATO #14</option>
     <option value="ME#28 ANDVAS ACETATO #13">ME#28 ANDVAS ACETATO #13</option>
@@ -195,7 +195,7 @@
     <option value="Gav#10 Marcas, masculino, mediano/pequeño Acetato">Gav#10 Marcas, masculino, grande Acetato</option>
     <option value="Gav#9 Marcas, masculino, grande Acetato">Gav#9 Marcas, masculino, grande Acetato</option>
     <option value="Gav#8 Marcas Femenino, mediano/Pequeño">Gav#8 Marcas Masculino, ov/semiov, acet/metal</option>
-	<option value="Gav#7 Marcas Masculino, mediano/Pequeño">Gav#7 Marcas, Masc/Fem, med/Peq, Ov/semiov</option>
+	   <option value="Gav#7 Marcas Masculino, mediano/Pequeño">Gav#7 Marcas, Masc/Fem, med/Peq, Ov/semiov</option>
     <option value="Gav#6 Marcas Femenino, mediano/Pequeño">Gav#6 Marcas Fem, med/grande, acetato</option>
     <option value="Gav#5 Marcas Femenino, mediano/grande">Gav#5 Marcas Femenino, mediano/grande</option>
     <option value="Gav#4 Marcas Femenino, Todo Tamaño">Gav#4 Marcas Femenino, Todo Tamaño</option>
@@ -221,6 +221,8 @@
     <input type="hidden" name="id_producto" id="id_producto"/>
     <input type="hidden" name="categoria" id="categoria" value="aros"/>
     <input type="hidden" name="categoriaacc" id="categoriacc" value="null"/>
+    <input type="hidden" name="stock" id="stock" value="0"/>
+
 
     <button type="submit" id="agregar" name="agregar" class="btn btn-blue btn-block"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 Guardar</button>
