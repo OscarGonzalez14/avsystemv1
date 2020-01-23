@@ -282,7 +282,7 @@
 					$output["modelo"] = $row["modelo"];
 					$output["marca"] = $row["marca"];
 					$output["color"] = $row["color"];
-					//$output["precio_venta"] = $row["precio_venta"];
+					$output["medidas"] = $row["medidas"];
 					$output["stock"] = $row["stock"];
 				     
 					

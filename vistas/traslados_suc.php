@@ -81,19 +81,20 @@
 
     <thead>
       <tr class="bg-primary">  
-        <th colspan="1">Item</th>
-        <th colspan="4">Descripcion</th>
-        <th colspan="2">Cantidad</th>
+        <th>Item</th>
+        <th>Descripcion</th>
+        <th>Cantidad</th>
+        <th>Ubicación de Origen</th>
       </tr>
     </thead>                  
   <tbody id="listEnviosSucursal"></tbody>          
-<input type="hidden" name="tipo_traslado" value="interno">
+<input type="hidden" name="tipo_traslado" value="sucursal-sucursal">
 <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
 <input type="hidden" name="usuario" id="usuario" value="<?php echo $_SESSION["usuario"];?>"/>
                
   </table>
  <div class="boton_registrar">
-<button type="button" onClick="registrarTraslados()" class="btn btn-dark pull-right btn-block" id="btn_enviar"><span class="glyphicon glyphicon-share-alt">  Realizar Traslado</button>
+<button type="button" onClick="registrarTrasladosSucursales()" class="btn btn-dark pull-right btn-block" id="btn_enviar"><span class="glyphicon glyphicon-share-alt">  Realizar Traslado a Sucursal</button>
 
 </div>
 
