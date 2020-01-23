@@ -80,9 +80,87 @@ require_once("../config/conexion.php");
                       } 
 
            //return $data;
+}
+
+public function producto_tralado_por_id($id_producto){
+    $conectar= parent::conexion();
+    $sql="select p.modelo,p.marca,p.medidas,p.color, e.id_producto,e.categoriaub,e.stock from producto as p inner join existencias as e on p.id_producto=e.id_producto and e.id_producto=?";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function traslado_a_sucursal(){
+  $str = '';
+  $detallesEn = array();
+  $detallesEn = json_decode($_POST['arrayTrasladosSucursal']);
+
+  $conectar=parent::conexion();
+
+    foreach ($detallesEn as $k =>$v) {
+      $cantidad = $v->cantidad;
+      $codProd = $v->codProd;
+      $categoriaub = $v->categoriaub;
+
+
+      $numero_envio = $_POST["numero_envio"];
+      $suc_origen = $_POST["suc_origen"];
+      $suc_destino = $_POST["suc_destino"];
+      $tipo_traslado = $_POST["tipo_traslado"];
+      $id_usuario = $_POST["id_usuario"];
+      $usuario = $_POST["usuario"];
+      $origen = $_POST["origen"];
+      $estado = "0";
+
+  $sql5="select * from existencias where id_producto=? and bodega=? and categoriaub=?;";             
+    $sql5=$conectar->prepare($sql5);
+    $sql5->bindValue(1,$codProd);
+    $sql5->bindValue(2,$suc_origen);
+    $sql5->bindValue(3,$categoriaub);
+    $sql5->execute();
+    $resultado2 = $sql5->fetchAll(PDO::FETCH_ASSOC);
+      foreach($resultado2 as $b=>$row){
+        $re["existencia"] = $row["stock"];
+      }
+                //la cantidad total es la suma de la cantidad más la cantidad actual
+    $cantidad_total2 = $row["stock"] - $cantidad;             
+               //si existe el producto entonces actualiza el stock en producto              
+      if(is_array($resultado2)==true and count($resultado2)>0) {                     
+        //actualiza el stock en la tabla producto
+      $sql6 = "update existencias set                      
+            stock=?
+            where 
+            id_producto=?
+            and
+            bodega=?
+            and categoriaub=?
+        ";
+      $sql6 = $conectar->prepare($sql6);
+      $sql6->bindValue(1,$cantidad_total2);
+      $sql6->bindValue(2,$codProd);
+      $sql6->bindValue(3,$suc_origen);
+      $sql6->bindValue(4,$categoriaub);
+      $sql6->execute();
       }
 
+    }///FIN DEL FOREACH
 
+    //REGISTRO DE TRASLADOS
+    $sql9="insert into traslados values(null,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?);";     
+    $sql9=$conectar->prepare($sql9);
+    $sql9->bindValue(1,$codProd);
+    $sql9->bindValue(2,$cantidad);
+    $sql9->bindValue(3,$id_usuario);
+    $sql9->bindValue(4,$numero_envio);       
+    $sql9->bindValue(5,$tipo_traslado);
+    $sql9->bindValue(6,$categoriaub);          
+    $sql9->bindValue(7,$suc_destino);
+    $sql9->bindValue(8,$estado);
+    $sql9->bindValue(9,$usuario);
+    $sql9->bindValue(10,$suc_origen);         
+    $sql9->execute();
+}
 
 public function agrega_detalle_ingreso(){
        
@@ -91,8 +169,7 @@ public function agrega_detalle_ingreso(){
   $detallesE = json_decode($_POST['arrayIngreso']);
    
   $conectar=parent::conexion();
-    foreach ($detallesE as $k => $v) {
-  
+    foreach ($detallesE as $k => $v) {  
     //IMPORTANTE:estas variables son del array detalles
     $cantidad = $v->cantidad;
     $codProd = $v->codProd;

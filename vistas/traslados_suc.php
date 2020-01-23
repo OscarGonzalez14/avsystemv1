@@ -88,7 +88,7 @@
       </tr>
     </thead>                  
   <tbody id="listEnviosSucursal"></tbody>          
-<input type="hidden" name="tipo_traslado" value="sucursal-sucursal">
+<input type="hidden" name="tipo_traslado" id="tipo_traslado" value="sucursal-sucursal">
 <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
 <input type="hidden" name="usuario" id="usuario" value="<?php echo $_SESSION["usuario"];?>"/>
                

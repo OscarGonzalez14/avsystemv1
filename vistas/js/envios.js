@@ -240,7 +240,8 @@ function traslado_Aros(id_producto){
 			modelo   : data.modelo,
 			marca    : data.marca,
 			color    : data.color,
-			stock    : data.stock,							
+			stock    : data.stock,
+
 		};
 		                
     detallesE.push(obj);
@@ -258,7 +259,7 @@ $('#listProdEnvios').html('');
 var filas = ""; 	
 for(var i=0; i<detallesE.length; i++){
 	 var filas = filas + "<tr><td colspan='1'>"+(i+1)+"</td> <td name='modelo[]' colspan='2'>"+detallesE[i].modelo+"</td> <td name='marca[]' colspan='1'>" +detallesE[i].marca+"</td> <td name='color[]' colspan='2'>" +
-	 detallesE[i].color+"</td><td colspan='1'><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesE[i].cantidad+"'> </td></tr>";
+	 detallesE[i].color+"</td><td colspan='1'><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesE[i].cantidad+"'> </td><td>"+detallesEn[i].categoriaub+"</td></tr>";
 }
 	$('#listProdEnvios').html(filas);      
   }
@@ -309,10 +310,10 @@ function registrarTraslados(){
 
 
 ///////CONTROL DE TRASLADOS A SUCURSAL
-var detallesE = [];	
+var detallesEn = [];	
 function trasladosaSucursal(id_producto){
     $.ajax({
-		url:"../ajax/producto.php?op=buscar_producto",
+		url:"../ajax/envios.php?op=buscar_producto_traslados",
 		method:"POST",
 		data:{id_producto:id_producto},
 		cache: false,
@@ -326,10 +327,11 @@ function trasladosaSucursal(id_producto){
 			marca    : data.marca,
 			color    : data.color,
 			stock    : data.stock,
-			medidas  : data.medidas							
+			medidas  : data.medidas,
+			categoriaub : data.categoriaub							
 		};
 		                
-    detallesE.push(obj);
+    detallesEn.push(obj);
 	listarTrasladoSucursal();
 	$('#envSucursal').modal("hide");
 
@@ -341,8 +343,8 @@ function trasladosaSucursal(id_producto){
 function listarTrasladoSucursal(){
 $('#listEnviosSucursal').html('');
 var filas = ""; 	
-for(var i=0; i<detallesE.length; i++){
-	 var filas = filas + "<tr><td>"+(i+1)+"</td> <td name='modelo[]'>"+detallesE[i].modelo+" "+detallesE[i].marca+" "+detallesE[i].medidas+" "+detallesE[i].color+"<td><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesE[i].cantidad+"'> </td><td><select class='origin' name='origin' class='form-control form-control-success' style='border-color: #5bc0de; border: solid 1px #5bc0de'></select></td></tr>";
+for(var i=0; i<detallesEn.length; i++){
+	 var filas = filas + "<tr><td>"+(i+1)+"</td> <td name='modelo[]'>"+detallesEn[i].modelo+" "+detallesEn[i].marca+" "+detallesEn[i].medidas+" "+detallesEn[i].color+"<td><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesEn[i].cantidad+"'> </td><td>"+detallesEn[i].categoriaub+"</td></tr>";
 }
 	$('#listEnviosSucursal').html(filas);      
 }
@@ -353,22 +355,21 @@ function registrarTrasladosSucursales(){
     var suc_origen = $("#suc_origen").val();
     var suc_destino = $("#suc_destino").val();
     var numero_envio = $("#numero_envio").val();   //var comprador = $("#comprador").html();
-  	var origen = $("#origin").val();
+  	//var origen = $("#origin").val();
     var id_usuario = $("#id_usuario").val();
     var usuario = $("#usuario").val();
     var tipo_traslado = $('#tipo_traslado').val();
  
-	if(ub_origen==ub_destino){
+	if(suc_origen==suc_destino){
  		alert("Revise las Sucursales de Origen y Destino");
 		return false;
 	} 
-    
     else{
     console.log('Proof');   
     $.ajax({
-		url:"../ajax/envios.php?op=registrar_traslado_suc",
+		url:"../ajax/envios.php?op=registrar_traslados_sucursal",
 		method:"POST",
-		data:{'arrayTrasladoSuc':JSON.stringify(detallesE),'suc_origen':suc_origen,'suc_destino,':suc_destino,'numero_envio':numero_envio,'origen':origen,'id_usuario':id_usuario,'usuario':usuario,'tipo_traslado':tipo_traslado},
+		data:{'arrayTrasladosSucursal':JSON.stringify(detallesEn),'suc_origen':suc_origen,'suc_destino':suc_destino,'numero_envio':numero_envio,'id_usuario':id_usuario,'usuario':usuario,'tipo_traslado':tipo_traslado},
 		cache: false,		
 		dataType:"html",
 		error:function(x,y,z){
@@ -379,13 +380,13 @@ function registrarTrasladosSucursales(){
 		success:function(data){
 		console.log(data);
         detalles = [];
-        $('#listProdEnvios').html('');
-        setTimeout ("bootbox.alert('Se ha registrado el envio con éxito');", 100);       
+        $('#listEnviosSucursal').html('');
+        setTimeout ("bootbox.alert('Se ha registrado el traslado con éxito');", 100);       
  
         setTimeout ("explode();", 2000); 
 		}
 	});	
-}	
+	}	
 	
 }
 

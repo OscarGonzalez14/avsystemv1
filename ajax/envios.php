@@ -96,61 +96,53 @@
 
      break;
 
- case "buscar_productos_envios";
-
-
-        
+ case "buscar_productos_envios";        
     $datos=$envio->get_producto_por_id($_POST["id_producto"]);
-
-            /*comprobamos que el producto esté activo, de lo contrario no lo agrega
-	      if(is_array($datos)==true and count($datos)>0){*/
-
-				foreach($datos as $row)
-				{
-					
+			foreach($datos as $row)
+				{				
 					$output["id_producto"] = $row["id_producto"];
 					$output["modelo"] = $row["modelo"];
 					$output["marca"] = $row["marca"];
 					$output["color"] = $row["color"];
-					//$output["precio_venta"] = $row["precio_venta"];
-					$output["stock"] = $row["stock"];
-				     
-					
-					
+					$output["stock"] = $row["stock"];     
 				}
-		
+	  echo json_encode($output);
 
+  break;
 
-	        echo json_encode($output);
+case "buscar_producto_traslados";
+          
+        $datos=$envio->producto_tralado_por_id($_POST["id_producto"]);
+
+        foreach($datos as $row)
+        {
+          
+          $output["id_producto"] = $row["id_producto"];
+          $output["modelo"] = $row["modelo"];
+          $output["marca"] = $row["marca"];
+          $output["color"] = $row["color"];
+          $output["medidas"] = $row["medidas"];
+          $output["stock"] = $row["stock"];
+          $output["categoriaub"] = $row["categoriaub"];     
+          
+          
+        }
+
+        echo json_encode($output);
 
      break;
 
-
-     case "registrar_ingreso";
-
+    case "registrar_ingreso";
 	    $envio->agrega_detalle_ingreso();
+    break;
 
+    /////********traslados sucursal
+    case "registrar_traslados_sucursal";
+      $envio->traslado_a_sucursal();
+    break;
 
-
-     break;
-
-     /*case "activarydesactivar":
-              
-                //los parametros id_usuario y est vienen por via ajax
-              $datos = $usuarios->get_usuario_por_id($_POST["id_usuario"]);
-                
-                //valida el id del usuario
-                 if(is_array($datos)==true and count($datos)>0){
-                    
-                    //edita el estado del usuario 
-                    $usuarios->editar_estado($_POST["id_usuario"],$_POST["est"]);
-                 }
-         break;*/
-
-         case "listar_requisiones":
-
-         $datos = $envio->listar_requisiones();
-
+    case "listar_requisiones":
+      $datos = $envio->listar_requisiones();
          //declaramos el array
 
          $data = Array();
