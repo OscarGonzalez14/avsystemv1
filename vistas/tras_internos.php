@@ -30,7 +30,7 @@
 
       <div class="col-xs-2">
           <label for="ex1">Numero Envio</label>
-          <input class="form-control" id="numero_envio" name="numero_envio" type="text" value="<?php $cod_envio=$envio->numeroRequisición();?>"  readonly>
+          <input class="form-control" id="numero_envio" name="numero_envio" type="text" value="<?php $cod_envio=$envio->numero_movimiento();?>"  readonly>
       </div>
 
       <div class="col-xs-4">         
@@ -86,6 +86,8 @@
         <th colspan="1">Item</th>
         <th colspan="4">Descripcion</th>
         <th colspan="2">Cantidad</th>
+        <th> Ub. Origen</th>
+        <th> Ub. Destino</th>
       </tr>
     </thead>                  
   <tbody id="listProdEnvios"></tbody>          

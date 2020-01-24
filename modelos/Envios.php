@@ -40,47 +40,33 @@ require_once("../config/conexion.php");
 
         }
 
-          
-      public function numeroRequisición(){
+////////**************NUMERO DE TRASLADO 
+public function numero_movimiento(){
 
-        $conectar=parent::conexion();
-        parent::set_names();
-
+  $conectar=parent::conexion();
+  parent::set_names();
      
-        $sql="select codigo_envio from detalle_envio;";
+  $sql="select num_traslado from traslados;";
+  $sql=$conectar->prepare($sql);
+  $sql->execute();
+  $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 
-        $sql=$conectar->prepare($sql);
-
-        $sql->execute();
-        $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
-
-           //aqui selecciono solo un campo del array y lo recorro que es el campo numero_venta
-           foreach($resultado as $k=>$v){
-
-                     $numero_venta["numero"]=$v["codigo_envio"];
-
-                   
-              
-                 }
-              //luego despues de tener seleccionado el numero_venta digo que si el campo numero_venta està vacio entonces se le asigna un F000001 de lo contrario ira sumando
-
-            
-
-                       if(empty($numero_venta["numero"]))
-                    {
-                      echo 'E000001';
-                    }else
-              
-                      {
-                        $num     = substr($numero_venta["numero"] , 1);
-                        $dig     = $num + 1;
-                        $fact = str_pad($dig, 6, "0", STR_PAD_LEFT);
-                        echo date("y")."-".'E'.$fact;
-                        //echo 'F'.$new_cod;
-                      } 
-
-           //return $data;
+  foreach($resultado as $k=>$v){
+    $codigo["numero"]=$v["num_traslado"];
+  }          
+    if(empty($codigo["numero"])){
+      echo 'T000001';
+  }else{
+    $num     = substr($codigo["numero"] , 2);
+    $dig     = $num + 1;
+    $fact = str_pad($dig, 6, "0", STR_PAD_LEFT);
+    echo 'T'.$fact;
+                        
+  } 
 }
+
+
+
 
 public function producto_tralado_por_id($id_producto){
     $conectar= parent::conexion();
@@ -110,8 +96,23 @@ public function traslado_a_sucursal(){
       $tipo_traslado = $_POST["tipo_traslado"];
       $id_usuario = $_POST["id_usuario"];
       $usuario = $_POST["usuario"];
-      $origen = $_POST["origen"];
+      //$origen = $_POST["origen"];
       $estado = "0";
+
+     //REGISTRO DE TRASLADOS
+    $sql9="insert into traslados values(null,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?);";     
+    $sql9=$conectar->prepare($sql9);
+    $sql9->bindValue(1,$codProd);
+    $sql9->bindValue(2,$cantidad);
+    $sql9->bindValue(3,$id_usuario);
+    $sql9->bindValue(4,$numero_envio);       
+    $sql9->bindValue(5,$tipo_traslado);
+    $sql9->bindValue(6,$categoriaub);          
+    $sql9->bindValue(7,$suc_destino);
+    $sql9->bindValue(8,$estado);
+    $sql9->bindValue(9,$usuario);
+    $sql9->bindValue(10,$suc_origen);         
+    $sql9->execute();     
 
   $sql5="select * from existencias where id_producto=? and bodega=? and categoriaub=?;";             
     $sql5=$conectar->prepare($sql5);
@@ -145,21 +146,6 @@ public function traslado_a_sucursal(){
       }
 
     }///FIN DEL FOREACH
-
-    //REGISTRO DE TRASLADOS
-    $sql9="insert into traslados values(null,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?);";     
-    $sql9=$conectar->prepare($sql9);
-    $sql9->bindValue(1,$codProd);
-    $sql9->bindValue(2,$cantidad);
-    $sql9->bindValue(3,$id_usuario);
-    $sql9->bindValue(4,$numero_envio);       
-    $sql9->bindValue(5,$tipo_traslado);
-    $sql9->bindValue(6,$categoriaub);          
-    $sql9->bindValue(7,$suc_destino);
-    $sql9->bindValue(8,$estado);
-    $sql9->bindValue(9,$usuario);
-    $sql9->bindValue(10,$suc_origen);         
-    $sql9->execute();
 }
 
 public function agrega_detalle_ingreso(){
@@ -231,8 +217,7 @@ public function agrega_detalle_ingreso(){
 
 
   $sql5="select * from existencias where id_producto=? and bodega=? and categoriaub=?;";
-             //echo $sql3;
-             
+             //echo $sql3;             
              $sql5=$conectar->prepare($sql5);
              $sql5->bindValue(1,$codProd);
              $sql5->bindValue(2,$sucursal);

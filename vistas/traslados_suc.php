@@ -31,7 +31,7 @@
 
       <div class="col-xs-2">
           <label for="ex1">Numero Envio</label>
-          <input class="form-control" id="numero_envio" name="numero_envio" type="text" value="<?php $cod_envio=$envio->numeroRequisición();?>"  readonly>
+          <input class="form-control" id="numero_envio" name="numero_envio" type="text" value="<?php $cod_envio=$envio->numero_movimiento();?>"  readonly>
       </div>
 
       <div class="col-xs-4">         

@@ -227,7 +227,7 @@ $(document).ready(function(){
 var detallesE = [];	
 function traslado_Aros(id_producto){
     $.ajax({
-		url:"../ajax/producto.php?op=buscar_producto",
+		url:"../ajax/envios.php?op=buscar_producto_traslados",
 		method:"POST",
 		data:{id_producto:id_producto},
 		cache: false,
@@ -241,6 +241,8 @@ function traslado_Aros(id_producto){
 			marca    : data.marca,
 			color    : data.color,
 			stock    : data.stock,
+			medidas  : data.medidas,
+			categoriaub : data.categoriaub
 
 		};
 		                
@@ -259,7 +261,7 @@ $('#listProdEnvios').html('');
 var filas = ""; 	
 for(var i=0; i<detallesE.length; i++){
 	 var filas = filas + "<tr><td colspan='1'>"+(i+1)+"</td> <td name='modelo[]' colspan='2'>"+detallesE[i].modelo+"</td> <td name='marca[]' colspan='1'>" +detallesE[i].marca+"</td> <td name='color[]' colspan='2'>" +
-	 detallesE[i].color+"</td><td colspan='1'><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesE[i].cantidad+"'> </td><td>"+detallesEn[i].categoriaub+"</td></tr>";
+	 detallesE[i].color+"</td><td colspan='1'><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesE[i].cantidad+"'></td><td>"+detallesE[i].categoriaub+"</td><td><select id='ubicaciong' class='form-control form-control-success' style='border-color: #5bc0de; border: solid 2px #5bc0de'></td></tr>";
 }
 	$('#listProdEnvios').html(filas);      
   }
@@ -344,7 +346,7 @@ function listarTrasladoSucursal(){
 $('#listEnviosSucursal').html('');
 var filas = ""; 	
 for(var i=0; i<detallesEn.length; i++){
-	 var filas = filas + "<tr><td>"+(i+1)+"</td> <td name='modelo[]'>"+detallesEn[i].modelo+" "+detallesEn[i].marca+" "+detallesEn[i].medidas+" "+detallesEn[i].color+"<td><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesEn[i].cantidad+"'> </td><td>"+detallesEn[i].categoriaub+"</td></tr>";
+	 var filas = filas + "<tr><td>"+(i+1)+"</td> <td name='modelo[]'>"+detallesEn[i].modelo+" "+detallesEn[i].marca+" "+detallesEn[i].medidas+" "+detallesEn[i].color+"<td><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='fijarCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesEn[i].cantidad+"'> </td><td>"+detallesEn[i].categoriaub+"</td></tr>";
 }
 	$('#listEnviosSucursal').html(filas);      
 }
@@ -360,7 +362,7 @@ function registrarTrasladosSucursales(){
     var usuario = $("#usuario").val();
     var tipo_traslado = $('#tipo_traslado').val();
  
-	if(suc_origen==suc_destino){
+	if(suc_origen==suc_destino || suc_origen == "" || suc_destino == ""){
  		alert("Revise las Sucursales de Origen y Destino");
 		return false;
 	} 
@@ -393,6 +395,11 @@ function registrarTrasladosSucursales(){
 function setCantidad(event, obj, idx){
   	event.preventDefault();
   	detallesE[idx].cantidad = parseInt(obj.value);
+}
+
+function fijarCantidad(event, obj, idx){
+  	event.preventDefault();
+  	detallesEn[idx].cantidad = parseInt(obj.value);
 }
 
 function explode(){
