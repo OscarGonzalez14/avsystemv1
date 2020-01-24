@@ -28,8 +28,8 @@
           $atributo = "badge bg-green";
       }
 
-        //$sub_array = array();
-      $sub_array[] = $row["id_producto"];
+        $sub_array[] = $row["id_ingreso"];
+        $sub_array[] = $row["id_producto"];
         $sub_array[] = $row["modelo"];
         $sub_array[] = $row["marca"];
         $sub_array[] = $row["color"];
@@ -37,7 +37,7 @@
         $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'</span>';        
               $sub_array[] = $row["bodega"];
               $sub_array[] = $row["categoriaub"];
-      $sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-dark btn-md " onClick="traslado_Aros('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agrega Envio</button>';              
+      $sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-dark btn-md " onClick="traslado_Aros('.$row["id_producto"].','.$row["id_ingreso"].')"><i class="fa fa-plus"></i> Agrega Envio</button>';              
       $data[] = $sub_array;
   }
 
@@ -73,7 +73,8 @@
       }
 
         //$sub_array = array();
-      $sub_array[] = $row["id_producto"];
+        $sub_array[] = $row["id_producto"];
+        $sub_array[] = $row["id_ingreso"];
         $sub_array[] = $row["modelo"];
         $sub_array[] = $row["marca"];
         $sub_array[] = $row["color"];
@@ -81,7 +82,7 @@
         $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'</span>';        
               $sub_array[] = $row["bodega"];
               $sub_array[] = $row["categoriaub"];
-      $sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-dark btn-md " onClick="trasladosaSucursal('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agrega Envio</button>';              
+      $sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-dark btn-md " onClick="trasladosaSucursal('.$row["id_producto"].','.$row["id_ingreso"].')"><i class="fa fa-plus"></i> Agrega Envio</button>';              
       $data[] = $sub_array;
   }
 
@@ -112,7 +113,7 @@
 
 case "buscar_producto_traslados";
           
-        $datos=$envio->producto_tralado_por_id($_POST["id_producto"]);
+        $datos=$envio->producto_tralado_por_id($_POST["id_producto"],$_POST["id_ingreso"]);
 
         foreach($datos as $row)
         {
@@ -236,6 +237,27 @@ case "buscar_producto_traslados";
     ";  
     echo $html;
   }
+
+  case 'select_gaveta_destino':
+
+    if ($_POST['id_tipo']=='Metrocentro') {
+      $html="
+        <option value=''>SELECCIONE</option>
+        <option value='Gav#24 ECONOMICO MASCULINO'>Gav#24 ECONOMICO MASCULINO</option>
+        <option value='Gav#23 ECONOMICO MASCULINO'>Gav#23 ECONOMICO MASCULINO</option>
+      ";
+      echo $html;
+    }
+    
+    if ($_POST['id_tipo']=='Santa Ana') {
+    $html="
+    <option value=''>Seleccio25ne</option>
+    <option value='Gav#24 ECONOMICO MASCULINO'>Gav#24 ECONOMICO MASCULINO</option>
+    ";  
+    echo $html;
+  }  
+
+  break;
 
 
 }

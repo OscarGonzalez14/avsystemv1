@@ -35,23 +35,11 @@
 
       <div class="col-xs-4">         
       <label for="sucursal">Seleccionar Bodega</label>
-      <select id="sucursal" class="form-control form-control-success">
-        <option selected value="">Seleccionar</option>
+      <select id="sucursal_origen" class="form-control form-control-success">
+        <option value="">Seleccionar</option>
         <option value="Metrocentro">Metrocentro</option>
         <option value="Santa Ana">Santa Ana</option>
      </select>    
-      </div>
-
-      <div class="col-xs-3">         
-      <label for="ub_origen">Origen</label>
-      <select id="ub_origen" name="ub_origen"  class="form-control form-control-success  ubicaciones">
-      </select>    
-      </div>
-
-      <div class="col-xs-3">         
-      <label for="ub_destino">Destino</label>
-      <select name="ub_destino" id='ub_destino' class="form-control form-control-success  ubicaciones">
-      </select>    
       </div>
 
       </div>
