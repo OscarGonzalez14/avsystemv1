@@ -82,7 +82,7 @@
       </ul>
       </div>
     </nav>        
-<div id="factheader"><h4 align="center">Factura de Consumidor Final</h4></div>
+
 <div class="row"><!--Row 1-->
   <div class="col-sm-1"></div>
   <div class="col-sm-10 row1">
@@ -157,7 +157,7 @@
           <option  value="Venta en sucursal">Venta en sucursal</option>
           <option  value="Empresarial">Empresarial</option>
           <option  value="Alianzas">Alianzas</option>          
-          <option  value="E-commerce">E-commerce</option>                   
+          <option  value="E-commerce">E-commerce</option>                     
                      
       </select>
       </div> 
@@ -265,8 +265,8 @@
 <input type="hidden" name="id_paciente" id="id_paciente"/>                
   </table>
  <div class="boton_registrar">
-<button type="button" onClick="registrarCotizacion()" class="btn btn-blue pull-right btn-block" id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Cotizar</button>
-
+<button type="button" onClick="registrarVenta()" class="btn btn-blue pull-right btn-block" id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Venta</button>
+<button type="button" class="btn btn-dark pull-right btn-block abono_ini" onClick="abono_inicial()"><i class="fa fa-save" aria-hidden="true"></i>  Abono Inicial</button>
 </div>
 
     </div> 

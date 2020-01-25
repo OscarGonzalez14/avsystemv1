@@ -273,7 +273,7 @@ public function agrega_detalle_venta(){
 		   $cod_pac = ["cod_pac"];
 		   //$paciente_nombre = $_POST["nombre"];
 		   $nombre_pac = $_POST["nombre_pac"];
-		   $tipo_pago ="Cargo Automatico";
+		   $tipo_pago =$_POST["tipo_pago"];
 		   $subtotal = $_POST["subtotal"];
 		   $usuario = $_POST["usuario"];
        $sucursal = $_POST["sucursal"];

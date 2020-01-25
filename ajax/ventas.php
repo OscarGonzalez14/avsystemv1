@@ -134,10 +134,8 @@
 
 	if ($_POST['id_tipo']=='Contado') {
 		$html="
-			<option value='prueba'>Seleccione</option>
-			<option value='Efectivo'>Efectivo</option>
-			<option value='Tarjeta de Credito'>Tarjeta de Crédito</option>			
-			<option value='Cheque'>Cheque</option>";
+			<option value='contado'>Seleccionew</option>
+			";
 	
 		echo $html;
 
