@@ -443,9 +443,9 @@
 
      break; 
 
-      case "buscar_producto_en_venta":
+      case "buscar_producto_en_ventas":
           
-          $datos=$productos->get_producto_por_id($_POST["id_producto"]);
+          $datos=$productos->get_producto_por_id($_POST["id_producto"],$_POST["ingreso"]);
 
 	      if(is_array($datos)==true and count($datos)>0){
 
@@ -477,6 +477,29 @@
 
      break;
 
+ case "buscar_producto_en_venta":
+	require_once('../modelos/Ventas.php');
+
+	    $venta = new Ventas();
+
+ 		$datos=$venta->get_producto_para_venta($_POST["id_producto"],$_POST["id_ingreso"]);
+	    if(is_array($datos)==true and count($datos)>0){
+	    foreach ($datos as $row) {
+	      	$output["modelo"] = $row["modelo"];
+	      	$output["marca"] = $row["marca"];
+	      	$output["medidas"] = $row["medidas"];
+	      	$output["color"] = $row["color"];
+	      	$output["precio_venta"] = $row["precio_venta"];
+	      	$output["id_producto"] = $row["id_producto"];
+	      	$output["id_ingreso"] = $row["id_ingreso"];
+	      	$output["categoriaub"] = $row["categoriaub"];
+	      	$output["stock"] = $row["stock"];
+
+	      	}
+	    }
+	echo json_encode($output);
+
+ break;
 
     case "listar_acc_en_ventas":
 

@@ -263,6 +263,8 @@ public function agrega_detalle_venta(){
 		$precio_venta = $v->precio_venta; 
 		$dscto = $v->dscto;
     $importe = $v->importe;
+    $id_ingreso = $v->id_ingreso;
+    $categoriaub = $v->categoriaub;
 		//$importe = $v->importe;
   	//$estado = $v->estado;
 
@@ -273,7 +275,7 @@ public function agrega_detalle_venta(){
 		   $cod_pac = ["cod_pac"];
 		   //$paciente_nombre = $_POST["nombre"];
 		   $nombre_pac = $_POST["nombre_pac"];
-		   $tipo_pago =$_POST["tipo_pago"];
+		   $tipo_pago ="Cargo Automatico";
 		   $subtotal = $_POST["subtotal"];
 		   $usuario = $_POST["usuario"];
        $sucursal = $_POST["sucursal"];
@@ -307,7 +309,7 @@ public function agrega_detalle_venta(){
         $sql->execute();
          
 
-    $sql11="select * from existencias where id_producto=? and bodega=?;";
+    $sql11="select * from existencias where id_producto=? and bodega=? and id_ingreso=? and categoriaub=?;";
 
              //echo $sql3;
              
@@ -315,6 +317,8 @@ public function agrega_detalle_venta(){
 
              $sql11->bindValue(1,$codProd);
              $sql11->bindValue(2,$sucursal);
+             $sql11->bindValue(3,$id_ingreso);
+             $sql11->bindValue(4,$categoriaub);
              $sql11->execute();
 
              $resultados = $sql11->fetchAll(PDO::FETCH_ASSOC);
@@ -339,7 +343,7 @@ public function agrega_detalle_venta(){
                       
                       stock=?
                       where 
-                      id_producto=? and bodega=?
+                      id_producto=? and bodega=? and id_ingreso=? and categoriaub=?
                  ";
 
 
@@ -347,6 +351,8 @@ public function agrega_detalle_venta(){
                 $sql12->bindValue(1,$cantidad_totales);
                 $sql12->bindValue(2,$codProd);
                 $sql12->bindValue(3,$sucursal);
+                $sql12->bindValue(4,$id_ingreso);
+                $sql12->bindValue(5,$categoriaub);
                 $sql12->execute();               
 }
 
@@ -1248,28 +1254,22 @@ public function lista_busca_ventas_suc($sucursal){
   //variables que vienen por POST VIA AJAX
   $suscursal=$_POST["sucursal"];
 
-      
-          $sql= "select p.id_producto,p.modelo, p.marca,p.color,p.medidas,p.precio_venta,b.categoriaub,b.stock,b.bodega from producto as p inner join existencias as b on p.id_producto=b.id_producto where b.bodega=? and b.stock>0";
+  $sql="select e.id_ingreso,p.id_producto,p.modelo,p.marca,p.color,p.medidas,p.precio_venta,e.stock,e.bodega,e.categoriaub,p.categoria from producto as p inner join existencias as e on e.id_producto=p.id_producto where e.stock>0";
 
-            $sql = $conectar->prepare($sql);
-            $sql->bindValue(1,$sucursal);
-            $sql->execute();
-            return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+  $sql = $conectar->prepare($sql);
+  $sql->bindValue(1,$sucursal);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 }          
+public function get_producto_para_venta($id_producto,$id_ingreso){
+    $conectar= parent::conexion();
+    $sql="select p.modelo,p.marca,p.medidas,p.color,p.precio_venta,e.id_producto,e.id_ingreso,e.categoriaub,e.stock from producto as p inner join existencias as e on p.id_producto=e.id_producto where e.id_producto=? and id_ingreso=?";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->bindValue(2, $id_ingreso);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
 
-
-/*public function reporte_diario_ventas_pdf(){
-
-         $conectar = parent::conexion();
-         parent::set_names();
-
-         $sql = "select c.monto,max(a.fecha_abono),a.monto_abono as abono,'0' as ant, a.id_paciente, count(c.id_credito),a.forma_pago,c.forma_pago as tipo_venta,c.saldo,a.fecha_abono from  pacientes as p inner join creditos as c on p.id_paciente=c.id_paciente inner join usuarios as u on u.id_usuario=c.id_usuario inner join abonos as a  on c.id_credito=a.id_credito  where a.forma_pago='Cheque' group by id_paciente having count(c.id_credito)<=1 and max(a.fecha_abono) = curdate() order by a.fecha_abono DESC;";
-
-         $sql=$conectar->prepare($sql);
-         $sql->execute();
-         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
-
-          
-         }*/
-   }
+}

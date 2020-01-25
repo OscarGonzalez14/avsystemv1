@@ -842,12 +842,12 @@ function listar_photo_en_ventas(){
 var detalles = [];
 
 	
-function agregarDetalleVenta(id_producto){
+function agregarDetalleVenta(id_producto,id_ingreso){
 		       $.ajax({
 				url:"../ajax/producto.php?op=buscar_producto_en_venta",
 				method:"POST",
 
-				data:{id_producto:id_producto},
+				data:{id_producto:id_producto,id_ingreso:id_ingreso},
 				cache: false,
 				dataType:"json",
 
@@ -856,6 +856,7 @@ function agregarDetalleVenta(id_producto){
         
 					var obj = {
 						cantidad : 1,
+						id_ingreso : id_ingreso,
 						codProd  : id_producto,
 						modelo   : data.modelo,	
 						marca    : data.marca,
@@ -863,7 +864,7 @@ function agregarDetalleVenta(id_producto){
 						medidas	 : data.medidas,						
 						precio_venta   : data.precio_venta,
 						stock    : data.stock,
-						categoria    : data.categoria,
+						categoriaub    : data.categoriaub,
 						importe  : 0,
 						dscto    : 0,
 						moneda   : '$'
