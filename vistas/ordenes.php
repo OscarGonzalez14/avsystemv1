@@ -33,7 +33,6 @@ if(isset($_SESSION["id_usuario"])){
           
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Lista de Ventas</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -43,13 +42,12 @@ if(isset($_SESSION["id_usuario"])){
                   <th>No. Orden</th>
                   <th>Fecha Envio</th>
                   <th>Laboratorio</th>
+                  <th>Sucursal</th>
                   <th>Nombre de Paciente</th>
-                  <th>Tipo de Lente</th>
-                  <th>Aro</th>
                   <th>Detalles</th>
+                  <th>Rechazar Orden</th>
+                  <th>Recibir Orden</th>
                   <th>Estado</th>
-                  <th>Recibir orden</th>
-                  <th>Creada por</th>
                 </tr>
                 </thead>                
               </table>
@@ -279,7 +277,7 @@ if(isset($_SESSION["id_usuario"])){
             <th><p align="center">Fecha Creación</p></th>
             <th><p align="center">Creado por:</p></th>
             <th><p align="center">Sucursal</p></th>
-            <th><p align="center">Nombre del Paciente</p></th>
+            <th><p align="center" colspan='3'>Nombre del Paciente</p></th>
             <th><p align="center">Laboratorio</p></th>
           </tr>
         </thead>
@@ -362,13 +360,8 @@ if(isset($_SESSION["id_usuario"])){
   </div>
 </div>
 </div> 
-<input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["usuario"]?>"/>
-<input type="hidden" name="estado" id="estado" value="Enviado de Optica a Laboratorio"/>
-
-
-      </div>
+</div>
       <div class="modal-footer">
-    <button type="submit"  class="btn btn-dark pull-right btn-block" id="btn_enviar_ini"><i class="fa fa-save" aria-hidden="true"></i>  Crear Orden</button>
 </form>    
       </div>
     </div>

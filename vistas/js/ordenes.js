@@ -83,9 +83,29 @@ function listar_ordenes()
 	}).DataTable();
 }
 
+
+////////RECHAZAR ORDEN
 function recibir_orden(id_orden){
 	$.ajax({
 		url:"../ajax/ordenes.php?op=recibe_orden",
+		method:"POST",
+		data:{id_orden:id_orden},
+		cache: false,		
+		dataType:"html",
+		error:function(x,y,z){
+			console.log(x);
+			console.log(y);
+			console.log(z);
+		},
+	});	
+	setTimeout ("explode();", 1000);
+}
+
+
+////////RECHAZAR ORDEN
+function rechazar_orden(id_orden){
+	$.ajax({
+		url:"../ajax/ordenes.php?op=rechazar_orden",
 		method:"POST",
 		data:{id_orden:id_orden},
 		cache: false,		
@@ -122,7 +142,7 @@ function envio_a_optica(id_orden){
 
 function show_orden(id_orden)
 {
-	$.post("ajax/laboratorio.php?op=show_ordenes_id",{id_orden : id_orden}, function(data, status)
+	$.post("ajax/ordenes.php?op=show_ordenes_id",{id_orden : id_orden}, function(data, status)
 	{
 		data = JSON.parse(data);
 

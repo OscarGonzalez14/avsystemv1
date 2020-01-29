@@ -210,7 +210,23 @@
 
          ?>
 
+         <?php if($_SESSION["ordenes"]==1)
+          {
+            echo '
+             <li class="treeview">
+              <a href="ordenes.php">
+               <i class="fa fa-file-o" aria-hidden="true"></i><span>Ordenes</span>
+              </a>
 
+             <ul class="treeview-menu">
+            <li><a href="control_ordenes.php"><i class="fa fa-circle-o"></i> Control de Ordenes</a></li>
+            <li><a href="ordenes_vencidas.php"><i class="fa fa-circle-o"></i> Ordenes Retrasadas</a></li>      
+          </ul>           
+            </li>';
+
+            }
+
+         ?>
 
 
           <?php if($_SESSION["ventas"]==1)

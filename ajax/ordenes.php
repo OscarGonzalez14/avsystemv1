@@ -22,29 +22,37 @@
 				$sub_array = array();
 
 				$estado = "";
-
+				$class="";
+				$atrib="";
 				if ($row["estado"]==0) {
-					$estado ='Enviado a Laboratorio';
+					$estado ='ENVIADA A LABORATORIO';
+					$class = "btn btn-warning btn-block";
 				}elseif ($row['estado']==1) {
-					$estado='Descargado en Lab.';
+					$estado='ORDEN DESCARGADA EN LAB.';
+					$class = "btn btn-primary btn-block";
 				}elseif ($row['estado']==2) {
-					$estado='Despachado de Laboratorio';
+					$estado='DESPACHADO DE LABORATORIO';
+					$class = "btn btn-info btn-block";
 				}elseif ($row['estado']==3) {
-					$estado='ORDEN RECIBIDA';
+					$estado='ORDEN RECHAZADA';
+					$class = "btn btn-danger btn-block";
+				}elseif ($row['estado']==4) {
+					$estado='ORDEN RECIBIDA EN OPTICA';
+					$class = "btn btn-edit btn-block";
 				}
+				
 				
 			
 	             $sub_array[] = $row["numero_orden"];
 	             $sub_array[] = $row["fecha"];
 				 $sub_array[] = $row["optica"];
+				 $sub_array[] = $row["sucursal"];
 				 $sub_array[] = $row["paciente"];
-				 $sub_array[] = $row["lentes"];
-				 $sub_array[] = $row["aro"];
             
-                 $sub_array[] = '<button type="button" class="btn btn-infos btn-md" data-toggle="modal" data-target="#show_orden" onClick="show_orden_data('.$row["id_orden"].')"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button>';
-                 $sub_array[]=$estado;
-                 $sub_array[] = '<button type="button" class="btn btn-edit btn-md"  onClick="recibir_orden('.$row["id_orden"].')" ><i class="fa fa-arrow-circle-o-right"></i> Recibir</button>';
-                 $sub_array[] = $row["usuario"];
+                $sub_array[] = '<button type="button" class="btn btn-blue btn-md" data-toggle="modal" data-target="#show_orden" onClick="show_orden_data('.$row["id_orden"].')"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button>';
+                $sub_array[] = '<button type="button" class="btn btn-danger btn-md"  onClick="rechazar_orden('.$row["id_orden"].')" ><i class="fa fa-thumbs-o-down"></i> Rechazar</button>';
+                 $sub_array[] = '<button type="button" class="btn btn-success btn-md"  onClick="recibir_orden('.$row["id_orden"].')" ><i class="fa fa-smile-o"></i> Recibir</button>';
+                  $sub_array[]='<button type="button" class="'.$class.'"></i>'.$estado.'</button>';
 				 $data[] = $sub_array;
 			}
 
@@ -61,6 +69,11 @@ break;
 case 'recibe_orden':
     
       $actualiza=$ordenes->recibir_orden($_POST["id_orden"]);
+break;
+
+case 'rechazar_orden':
+    
+      $actualiza=$ordenes->rechazar_orden($_POST["id_orden"]);
 break;
      
      

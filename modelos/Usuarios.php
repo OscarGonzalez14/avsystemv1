@@ -110,10 +110,10 @@
       in_array(7,$valores)?$_SESSION['reporte_compras']=1:$_SESSION['reporte_compras']=0;
       in_array(8,$valores)?$_SESSION['reporte_ventas']=1:$_SESSION['reporte_ventas']=0;
       in_array(9,$valores)?$_SESSION['usuarios']=1:$_SESSION['usuarios']=0;
-
-      in_array(11,$valores)?$_SESSION['backup']=1:$_SESSION['backup']=0;
-      //**********************************************************************//
       in_array(10,$valores)?$_SESSION['empresa']=1:$_SESSION['empresa']=0;
+      in_array(11,$valores)?$_SESSION['ordenes']=1:$_SESSION['ordenes']=0;
+      //**********************************************************************//
+     
           
 
       //FIN PERMISOS DEL USUARIO   
