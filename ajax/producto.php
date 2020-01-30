@@ -389,7 +389,7 @@
 				
       
 
-			$sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-primary btn-md " onClick="agregarDetalleVenta_acc('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agregar</button>';
+			$sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-primary btn-md " onClick="agregarDetalleVenta_lente('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agregar</button>';
         
 			
 				$data[] = $sub_array;
@@ -443,7 +443,8 @@
 
      break; 
 
-      case "buscar_producto_en_ventas":
+////////LISTA AROS EN VENTAS****************
+    case "buscar_producto_en_ventas":
           
           $datos=$productos->get_producto_por_id($_POST["id_producto"],$_POST["ingreso"]);
 
@@ -462,9 +463,7 @@
 					$output["categoria"] = $row["categoria"];
 					
 				}
-		
-		     
-
+		   
 
 	        } else {
                  
@@ -476,6 +475,40 @@
 	        echo json_encode($output);
 
      break;
+
+////////LISTA LENTES EN VENTAS****************
+    case "buscar_producto_lente_venta":
+          
+          $datos=$productos->get_lente_por_id($_POST["id_producto"]);
+
+	      if(is_array($datos)==true and count($datos)>0){
+
+				foreach($datos as $row)
+				{
+					$output["id_producto"] = $row["id_producto"];
+					$output["medidas"] = $row["medidas"];
+					$output["modelo"] = $row["modelo"];
+					$output["marca"] = $row["marca"];
+					$output["color"] = $row["color"];			
+
+					$output["precio_venta"] = $row["precio_venta"];
+					$output["stock"] = $row["stock"];
+					$output["categoria"] = $row["categoria"];
+					
+				}
+		   
+
+	        } else {
+                 
+                 //si no existe el registro entonces no recorre el array
+                 $output["error"]="El producto seleccionado está inactivo, intenta con otro";
+
+	        }
+
+	        echo json_encode($output);
+
+     break;
+
 
  case "buscar_producto_en_venta":
 	require_once('../modelos/Ventas.php');

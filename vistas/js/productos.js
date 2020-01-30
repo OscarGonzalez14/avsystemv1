@@ -840,6 +840,45 @@ function listar_photo_en_ventas(){
 }
 
 var detalles = [];
+
+
+function agregarDetalleVenta_lente(id_producto){
+		       $.ajax({
+				url:"../ajax/producto.php?op=buscar_producto_lente_venta",
+				method:"POST",
+
+				data:{id_producto:id_producto},
+				cache: false,
+				dataType:"json",
+
+				success:function(data){                     
+        
+					var obj = {
+						cantidad : 1,
+						codProd  : id_producto,
+						modelo   : data.modelo,	
+						marca    : data.marca,
+						color    : data.color,				
+						medidas	 : data.medidas,						
+						precio_venta   : data.precio_venta,
+						stock    : data.stock,
+						importe  : 0,
+						dscto    : 0,
+						moneda   : '$'
+							
+					};
+
+					detalles.push(obj);
+					listarDetallesVentas();						
+					$('#lista_lentes_ventas_Modal').modal("hide"); 
+        
+                   						
+					}//fin success		
+
+				});//fin de ajax		
+		    
+		  }// fin de funcion
+
 	
 function agregarDetalleVenta(id_producto,id_ingreso){
 		       $.ajax({
