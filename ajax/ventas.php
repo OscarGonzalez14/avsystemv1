@@ -678,18 +678,13 @@ case "ver_ultima_venta_lentes":
     foreach($datos as $row)
 			{
 				$sub_array = array();
-
-
-
-
 				  //STOCK, si es mejor de 10 se pone rojo sino se pone verde
 				  $stock=""; 
 
 				  if($row["stock"]<=5){
                       
                      $stock = $row["stock"];
-                     $atributo = "badge bg-red-active";
-                            
+                     $atributo = "badge bg-red-active";                            
 				 
 				  } else {
 

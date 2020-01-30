@@ -57,7 +57,7 @@ public function numero_orden(){
 
 		                   if(empty($numero_orden["numero"]))
 		                {
-		                  echo 'AV001';
+		                  echo 'AV000001';
 		                }else
 		          
 		                  {

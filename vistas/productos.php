@@ -19,7 +19,7 @@
   require_once("header.php");
 ?>
 
-
+<?php require_once("modal/agregar_lentes.php");?>
     <?php if($_SESSION["productos"]==1)
      {
 
@@ -67,7 +67,7 @@
 
             <a href="bodegas.php"><button class="btn btn-edit btn-md" id="add_button" onclick="limpiar()"<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Bodegas</button></h1></a>
 
-      <a href="envios.php"><button class="btn btn-dark btn-md" id="add_button" id="add_button" data-toggle="modal" data-target="#orden_envio"><span class="glyphicon glyphicon-share-alt"></span> Envios</button></h1></a>              
+           <a href="envios.php"><button class="btn btn-dark btn-md" id="add_button" id="add_button" data-toggle="modal" data-target="#orden_envio"><span class="glyphicon glyphicon-share-alt"></span> Envios</button></h1></a>              
 
                         <div class="box-tools pull-right">
 

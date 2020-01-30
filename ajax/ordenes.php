@@ -49,12 +49,43 @@
 				 $sub_array[] = $row["sucursal"];
 				 $sub_array[] = $row["paciente"];
             
-                $sub_array[] = '<button type="button" class="btn btn-blue btn-md" data-toggle="modal" data-target="#show_orden" onClick="show_orden_data('.$row["id_orden"].')"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button>';
-                $sub_array[] = '<button type="button" class="btn btn-danger btn-md"  onClick="rechazar_orden('.$row["id_orden"].')" ><i class="fa fa-thumbs-o-down"></i> Rechazar</button>';
-                 $sub_array[] = '<button type="button" class="btn btn-success btn-md"  onClick="recibir_orden('.$row["id_orden"].')" ><i class="fa fa-smile-o"></i> Recibir</button>';
+                $sub_array[] = '<button type="button" class="btn btn-dark btn-md" data-toggle="modal" data-target="#show_orden" onClick="show_orden_data('.$row["id_orden"].')"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button>';
+                $sub_array[] = '<button type="button" class="btn btn-dark btn-md"  onClick="rechazar_orden('.$row["id_orden"].')" ><i class="fa fa-thumbs-o-down"></i> Rechazar</button>';
+                 $sub_array[] = '<button type="button" class="btn btn-dark btn-md"  onClick="recibir_orden('.$row["id_orden"].')" ><i class="fa fa-smile-o"></i> Recibir</button>';
                   $sub_array[]='<button type="button" class="'.$class.'"></i>'.$estado.'</button>';
 				 $data[] = $sub_array;
 			}
+
+      $results = array(
+ 			"sEcho"=>1, //Información para el datatables
+ 			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+ 			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+ 			"aaData"=>$data);
+ 		echo json_encode($results);
+
+
+break;
+
+case "listar_ordenes_vencidas":
+	$datos=$ordenes->get_detalle_ordenes_vencidas();
+    $data= Array();
+
+
+    foreach($datos as $row)
+	{
+
+		$retraso = $row["horas"]-72;
+
+		$sub_array = array();			
+	    $sub_array[] = $row["numero_orden"];
+	    $sub_array[] = $row["fecha"];
+		$sub_array[] = $row["optica"];
+		$sub_array[] = $row["sucursal"];
+		$sub_array[] = $row["paciente"];            
+        $sub_array[] = '<button type="button" class="btn btn-dark btn-md" data-toggle="modal" data-target="#show_orden" onClick="show_orden_data('.$row["id_orden"].')"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button>';
+        $sub_array[] = $retraso ." "." horas de retraso"; 
+        $data[] = $sub_array;
+	}
 
       $results = array(
  			"sEcho"=>1, //Información para el datatables

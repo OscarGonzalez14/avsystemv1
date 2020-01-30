@@ -840,7 +840,6 @@ function listar_photo_en_ventas(){
 }
 
 var detalles = [];
-
 	
 function agregarDetalleVenta(id_producto,id_ingreso){
 		       $.ajax({
@@ -1108,15 +1107,6 @@ obj.value es el valor del campo de texto*/
   		listarDetallesVentas();
   	}
 
-
-
- //********************************************************************
- 
-
-
-/* {'arrayCompra':JSON.stringify(detalles)}:Esa parte encapsula el arreglo detalles y lo envía como un solo parametro
-
-*/
 
  function registrarVenta(){
     

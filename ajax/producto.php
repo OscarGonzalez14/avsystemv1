@@ -389,7 +389,7 @@
 				
       
 
-			$sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-primary btn-md " onClick="agregarDetalleVenta('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agregar</button>';
+			$sub_array[] = '<button type="button" name="" id="'.$row["id_producto"].'" class="btn btn-primary btn-md " onClick="agregarDetalleVenta_acc('.$row["id_producto"].')"><i class="fa fa-plus"></i> Agregar</button>';
         
 			
 				$data[] = $sub_array;

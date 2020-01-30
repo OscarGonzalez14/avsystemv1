@@ -28,7 +28,7 @@
                
                 <thead>
                   <tr>
-                      <th>Cod.</th>
+                    <th>Cod.</th>
                     <th>Modelo</th>
                     <th>Marca</th>
                     <th>Color</th>

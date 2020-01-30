@@ -21,14 +21,16 @@
       require_once("../modelos/Compras.php");
       require_once("../modelos/Pacientes.php");
       require_once("../modelos/Ventas.php");
+      require_once("../modelos/Ordenes.php");
+      $categoria = new Categoria();
+      $producto = new Producto();
+      $proveedor = new Proveedor();
+      $compra = new Compras();
+      $paciente = new Paciente();
+      $venta = new Ventas();
+      $usuario = new Usuarios();
+      $orden = new Ordenes();
 
-       $categoria = new Categoria();
-       $producto = new Producto();
-       $proveedor = new Proveedor();
-       $compra = new Compras();
-       $paciente = new Paciente();
-       $venta = new Ventas();
-       $usuario = new Usuarios();
 
 ?>
 
@@ -218,9 +220,14 @@
                <i class="fa fa-file-o" aria-hidden="true"></i><span>Ordenes</span>
               </a>
 
-             <ul class="treeview-menu">
-            <li><a href="control_ordenes.php"><i class="fa fa-circle-o"></i> Control de Ordenes</a></li>
-            <li><a href="ordenes_vencidas.php"><i class="fa fa-circle-o"></i> Ordenes Retrasadas</a></li>      
+            <ul class="treeview-menu">
+              <li><a href="ordenes.php"><i class="fa fa-circle-o"></i> Ordenes</a></li>
+              <a href="ordenes_vencidas.php">
+                <i class="class="fa fa-circle-o" aria-hidden="true"></i><span> Ordenes Vencidas</span>
+                  <span class="pull-right-container badge bg-blue">
+                <i class="fa fa-bell pull-right">'.$orden->get_filas_ordenes_vencidas().'</i>                
+            </span>
+          </a>      
           </ul>           
             </li>';
 
