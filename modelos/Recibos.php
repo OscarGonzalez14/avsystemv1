@@ -103,5 +103,36 @@ public function get_datos_pac_rec_ini($sucursal){
 
 }
 
+public function get_recibos_print(){
+  $conectar=parent::conexion();
+  parent::set_names();
+
+  $sql="select*from recibos;";
+  $sql=$conectar->prepare($sql);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function get_recibo_id($numero_venta){
+  $conectar=parent::conexion();
+  parent::set_names();
+
+  $sql="select*from recibos where numero_venta=?;";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$numero_venta);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}     
+
+public function get_detalle_venta($numero_venta){
+  $conectar=parent::conexion();
+  parent::set_names();
+
+  $sql="select*from ventas where numero_venta=?;";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$numero_venta);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }

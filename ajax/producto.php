@@ -489,14 +489,12 @@
 					$output["medidas"] = $row["medidas"];
 					$output["modelo"] = $row["modelo"];
 					$output["marca"] = $row["marca"];
-					$output["color"] = $row["color"];			
-
+					$output["color"] = $row["color"];
 					$output["precio_venta"] = $row["precio_venta"];
 					$output["stock"] = $row["stock"];
 					$output["categoria"] = $row["categoria"];
 					
-				}
-		   
+				}		   
 
 	        } else {
                  

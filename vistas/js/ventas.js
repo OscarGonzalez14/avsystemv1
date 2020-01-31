@@ -141,7 +141,6 @@ function listar()
 }
 	
 function abono_inicial(){
-
 	
 		       $.ajax({
 				url:"../ajax/ventas.php?op=ver_ultima_venta",
