@@ -59,6 +59,7 @@ function limpiar()
 //Función Listar
 function listar()
 {
+	var sucursal_paciente = $("#sucursal_paciente").val();
 	tabla=$('#paciente_data').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
@@ -73,8 +74,9 @@ function listar()
 		"ajax":
 				{
 					url: '../ajax/paciente.php?op=listar',
-					type : "get",
-					dataType : "json",						
+					type : "post",
+					//dataType : "json",
+					data:{sucursal_paciente:sucursal_paciente},						
 					error: function(e){
 						console.log(e.responseText);	
 					}
@@ -229,33 +231,22 @@ function editarp(id_paciente)
 	$.post("../ajax/paciente.php?op=editarp",{id_paciente : id_paciente}, function(data, status)
 	{
 		data = JSON.parse(data);
-
-
-
-		   console.log(data);
+		console.log(data);
 		
-
-		
-					$('#pacienteModal').modal('show');
-
-					
+					$('#pacienteModal').modal('show');					
 					$('#id_paciente').val(data.id_paciente);
 					$('#codigo').val(data.codigo);
 					$('#nombres').val(data.nombres);	
 					$('#telefono').val(data.telefono);
 					$('#ocupacion').val(data.ocupacion);	
 					$('#empresa').val(data.empresa);
-					$('#edad').val(data.edad);		
-
+					$('#edad').val(data.edad);
+					$('#dui').val(data.dui);
 	                //$("#codigos").attr('disabled', 'disabled');
 					$('#correo').val(data.correo);
 				
                     //$('#id_paciente').val(data.id_paciente);
-
-					$('.modal-title').text("Editar Paciente");
-
-
-		      
+					$('.modal-title').text("Editar Paciente");	      
 		
 				
 		});
@@ -362,14 +353,12 @@ function listar_en_ventas(){
 			data:{id_paciente:id_paciente},
 			dataType:"json",
 			success:function(data)
-			{
-               
+			{           
              
       
 				$('#modalPaciente').modal('hide');
 				$('#cod_pac').val(data.codigo);
 				$('#nombre_pac').val(data.nombres);
-
 				$('#id_paciente').val(id_paciente);
 				
                         
@@ -381,10 +370,9 @@ function listar_en_ventas(){
      
      //ELIMINAR paciente
 
-	 function eliminarp(id_paciente){
-
+function eliminarp(id_paciente){
 	  
-	    bootbox.confirm("¿Está Seguro de eliminar el paciente?", function(result){
+	 bootbox.confirm("¿Está Seguro de eliminar el paciente?", function(result){
 		if(result)
 		{
 

@@ -35,9 +35,7 @@
         
         <div class="panel-body">
 
-            <form class="form-inline">
-
-            
+            <form class="form-inline">            
               <div class="form-group">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Fecha Inicial</label>
                  <div class="col-sm-10">
@@ -50,9 +48,7 @@
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="datepicker2" name="datepicker2" placeholder="Fecha Final">
                 </div>
-              </div>
-
-             
+              </div>         
 
                <div class="btn-group text-center">
                  <button type="button" class="btn btn-primary" id="btn_compra_fecha"><i class="fa fa-search" aria-hidden="true"></i> Consultar</button>

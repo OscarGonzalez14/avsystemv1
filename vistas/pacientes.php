@@ -2,26 +2,16 @@
 
    require_once("../config/conexion.php");
 
-    if(isset($_SESSION["id_usuario"])){
-    
+    if(isset($_SESSION["id_usuario"])){    
     require_once("../modelos/Usuarios.php");
     require_once("../modelos/Pacientes.php");
-    $codigo = new Paciente();
-    
-       
+    $codigo = new Paciente();      
        
 ?>
 
+<?php require_once("header.php"); ?>
 
-
-<?php
- 
-  require_once("header.php");
-
-?>
-
-
-  <?php if($_SESSION["pacientes"]==1)
+<?php if($_SESSION["pacientes"]==1)
      {
 
      ?>
@@ -41,10 +31,10 @@
       <div class="content-wrapper">        
         <!-- Main content -->
         <section class="content">
-             
+             <input type="hidden" id="sucursal_paciente" value="<?php echo $_SESSION["cedula"];?>">
              <div id="resultados_ajax"></div>
 
-             <h2>Modulo de Pacientes</h2>
+             <h3 align="center">PACIENTES <span style="text-transform: uppercase;"><?php echo $_SESSION["cedula"];?></span></h3>
 
             <div class="row">
               <div class="col-md-12">
@@ -52,14 +42,12 @@
                     <div class="box-header with-border">
                           <h1 class="box-title">
                             <button class="btn btn-dark btn-lg"  data-toggle="modal" data-target="#pacienteModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Paciente</button></h1>
-
                             <a href="consultas.php"><button class="btn btn-blue btn-lg"><i class="fa fa-address-card-o" aria-hidden="true"></i>
                               Consultas</button></h1></a>
-                              
-                        <a href="ordenes.php"><button class="btn btn-edit btn-lg"><i class="fa fa-file-o" aria-hidden="true"></i>
-                              Ordenes</button></h1></a>
+                            <a href="#"><button class="btn btn-dark btn-lg"><i class="fa fa-list-alt" aria-hidden="true"></i>
+                              Expedientes</button></h1></a>
 
-                        <div class="box-tools pull-right">
+                    <div class="box-tools pull-right">
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -68,10 +56,8 @@
                           
                           <table id="paciente_data" class="table table-bordered table-striped">
 
-                            <thead>
-                              
-                                <tr>
-                                  
+                            <thead>                              
+                                <tr>                                  
                                 <th>Codigo</th>
                                 <th>Nombres</th>
                                 <th>Teléfono</th>
@@ -79,8 +65,7 @@
                                 <th>Fecha de Registro</th>
                                 <th>Agregar consulta</th>
                                 <th width="10%">Editar</th>
-                                <th width="10%">Eliminar</th>
-
+                                
                                 </tr>
                             </thead>
 
@@ -106,8 +91,7 @@
    <!--FORMULARIO VENTANA MODAL-->
   
 <div class="modal fade" id="pacienteModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-    
+    <div class="modal-dialog modal-lg">    
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -126,7 +110,7 @@
 
       <div class="col-xs-12">
         <label for="ex1">Nombre</label>
-        <input class="form-control" id="nombres" name="nombres" type="text" placeholder="Escriba el Nombre del paciente" required>
+        <input class="form-control" id="nombres" name="nombres" type="text" placeholder="Escriba el Nombre del paciente"  onkeyup="mayus(this);"required>
       </div>
       <div class="col-xs-3">
         <label for="ex2">Telefono del Paciente</label>
@@ -140,12 +124,12 @@
 
       <div class="col-xs-6">
         <label for="ex3">Ocupación</label>
-        <input class="form-control" id="ocupacion" type="text" name="ocupacion" placeholder="ocupacion del paciente">
+        <input class="form-control" id="ocupacion" type="text" name="ocupacion" placeholder="ocupacion del paciente" onkeyup="mayus(this);">
       </div>
 
       <div class="col-xs-6">
-        <label for="ex3">Empresa</label>
-        <input class="form-control" id="empresa" type="text" name="empresa" placeholder="empresa" value="Ninguna">
+        <label for="ex3">DUI</label>
+        <input class="form-control" id="dui" type="text" name="dui" placeholder="DUI">
       </div>
 
       <div class="col-xs-6">
@@ -153,16 +137,15 @@
         <input class="form-control" id="correo" type="text" name="correo" placeholder="correo del paciente">
       </div>
 
-
     </div>
 
-  <input type="hidden" name="id_paciente" id="id_paciente"/>
-  <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
- 
+<input type="hidden" name="id_paciente" id="id_paciente"/>
+<input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
+<input type="hidden" name="sucursal" id="sucursal" value="<?php echo $_SESSION["cedula"];?>"/>
 
 <button type="submit"  class="btn btn-primary btn-block"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 Guardar</button>
-  </form>
+</form>
 
   </div>
         <div class="modal-footer">
@@ -233,15 +216,7 @@ Guardar</button>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>OI</td>
-        <td> <input type="text" class="form-control" placeholder="---" name="oiesfreasl" ></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="oicilindrosl" ></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="oiejesl" ></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="oiprismal" ></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="oiadicionl"></td>
-      </tr>
-      <tr>
+    <tr>
         <td>OD</td>
         <td> <input type="text" class="form-control" placeholder="---" name="odesferasl"></td>
         <td> <input type="text" class="form-control" placeholder="---" name="odcilndrosl"></td>
@@ -250,6 +225,15 @@ Guardar</button>
         <td> <input type="text" class="form-control" placeholder="---" name="odadicionl"></td>
         
       </tr>
+      <tr>
+        <td>OI</td>
+        <td> <input type="text" class="form-control" placeholder="---" name="oiesfreasl" ></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="oicilindrosl" ></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="oiejesl" ></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="oiprismal" ></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="oiadicionl"></td>
+      </tr>
+      
     </tbody>
   </table>
 
@@ -270,6 +254,14 @@ Guardar</button>
       </tr>
     </thead>
     <tbody>
+    <tr>
+        <td>OD</td>
+        <td> <input type="text" class="form-control" placeholder="---" name="odesferasa"></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="odcilindrosa"></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="odejesa"></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="dprismaa"></td>
+        <td> <input type="text" class="form-control" placeholder="---" name="oddiciona"></td>        
+      </tr>
       <tr>
         <td>OI</td>
         <td> <input type="text" class="form-control" placeholder="---" name="oiesferasa"></td>
@@ -278,14 +270,7 @@ Guardar</button>
         <td> <input type="text" class="form-control" placeholder="---" name="oiprismaa"></td>
         <td> <input type="text" class="form-control" placeholder="---" name="oiadiciona"></td>
       </tr>
-      <tr>
-        <td>OD</td>
-        <td> <input type="text" class="form-control" placeholder="---" name="odesferasa"></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="odcilindrosa"></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="odejesa"></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="dprismaa"></td>
-        <td> <input type="text" class="form-control" placeholder="---" name="oddiciona"></td>        
-      </tr>
+      
     </tbody>
   </table>
 
@@ -370,7 +355,19 @@ Guardar</button>
     </div>
   </div>
  <!--FIN FORMULARIO VENTANA MODAL-->
+ <script type="text/javascript" src="js/cleave.js"></script>
+<script>
 
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+
+var medidas = new Cleave('#dui', {
+    delimiter: '-',
+    blocks: [8,1],
+    uppercase: true
+});
+ </script>
 
   
   <?php  } else {

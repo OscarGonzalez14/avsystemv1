@@ -55,7 +55,7 @@
 
   <link rel="stylesheet" href="../public/datatables/jquery.dataTables.min.css">
   <link href="../public/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
-    <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
+  <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
 
 
   <!-- Theme style -->
@@ -121,13 +121,12 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-             
-            <span class="hidden-xs"> <?php echo $_SESSION["usuario"]?></span>
+            <span style="text-transform: uppercase;text-align:center">OPTICA AV PLUS <?php echo $_SESSION["cedula"];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="hidden-xs" style="text-transform: uppercase;text-align:center"><?php echo $_SESSION["usuario"]?></span>
             <i class="fa fa-sign-out" aria-hidden="true"> Cerrar Sesión</i>
             </a>
             <ul class="dropdown-menu">
                <li class="user-footer">
-
                 <div >
                   <a href="logout.php" class="btn btn-danger btn-block">Salir</a>
                 </div>
@@ -156,23 +155,52 @@
           
         </li>
 
-         <?php if($_SESSION["categoria"]==1)
+
+         <?php if($_SESSION["pacientes"]==1)
           {
+            echo '
 
-            echo '<li class="">
-
-              <a href="sucursales.php">
-                <i class="fa fa-list" aria-hidden="true"></i> <span>Sucursales</span>
-
-              </a>
+             <li class="">
+          <a href="pacientes.php">
+            <i class="fa fa-user" aria-hidden="true"></i> <span>Pacientes</span>            
+          </a>
          
-          </li>';
+        </li>';;
 
-          }
+            }
 
          ?>
 
+         <?php if($_SESSION["empresa"]==1)
+          {
+            echo '
+
+             <li class="">
+          <a href="empresas.php">
+            <i class="fa fa-building-o" aria-hidden="true"></i><span>Empresas</span>            
+          </a>
+         
+        </li>';
+
+            }
+
+         ?>
         
+         <?php if($_SESSION["cotizaciones"]==1)
+          {
+            echo '
+
+             <li class="">
+              <a href="cotizaciones.php">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i></i> <span>Cotizaciones</span>            
+              </a>         
+            </li>';
+
+            }
+
+         ?>
+
+
         <?php if($_SESSION["productos"]==1)
          
           {
@@ -197,22 +225,7 @@
          ?>
 
 
-         <?php if($_SESSION["pacientes"]==1)
-          {
 
-            echo '
-
-             <li class="">
-          <a href="pacientes.php">
-            <i class="fa fa-user" aria-hidden="true"></i> <span>Pacientes</span>
-            
-          </a>
-         
-        </li>';;
-
-            }
-
-         ?>
 
          <?php if($_SESSION["ordenes"]==1)
           {

@@ -18,49 +18,37 @@
    $telefono=isset($_POST["telefono"]);
    $edad=isset($_POST["edad"]);
    $ocupacion=isset($_POST["ocupacion"]);
-   $empresa=isset($_POST["empresa"]);
+   $dui=isset($_POST["dui"]);
    $correo=isset($_POST["correo"]);
+   $sucursal =isset($_POST["sucursal"]);
 
+    switch($_GET["op"]){
 
-     switch($_GET["op"]){
+    case "guardaryeditar":
+		$pacientes->registrar_paciente($codigo,$nombres,$telefono,$edad,$ocupacion,$sucursal,$dui,$correo,$id_usuario);	  
+    break;
 
-     case "guardaryeditar":
-
-			
-
-			$pacientes->registrar_paciente($codigo,$nombres,$telefono,$edad,$ocupacion,$empresa,$correo,$id_usuario);
-
-			       	   	  
-
-	
-     break;
-
-     case 'agregaConsulta':
+    case 'agregaConsulta':
      	$datos=$pacientes->get_pacientes();
 
      	foreach ($datos as $row) {
      		$output["id_paciente"]=$row["id_paciente"];
      		$output["nombres"]=$row["nombres"];
      	}
-
-     	echo json_encode($output);
-
-
-     	break;
+    echo json_encode($output);
+    break;
 
      case 'mostrar':
     
 	$datos=$pacientes->get_paciente_por_id($_POST["id_paciente"]);
 
-    				foreach($datos as $row)
-    				{
-    					$output["id_paciente"] = $row["id_paciente"];
-						$output["nombres"] = $row["nombres"];
-						$output["codigo"] = $row["codigo"];
-						
-    				}
-        
-         echo json_encode($output);
+    	foreach($datos as $row)
+    	{
+    		$output["id_paciente"] = $row["id_paciente"];
+			$output["nombres"] = $row["nombres"];
+			$output["codigo"] = $row["codigo"];						
+    	}
+    echo json_encode($output);
 
 
 	 break;
@@ -80,13 +68,11 @@
 						$output["correo"] = $row["correo"];
 						$output["codigo"] = $row["codigo"];
 						$output["edad"] = $row["edad"];
-						
+						$output["dui"] = $row["dui"];						
     				}
         
-         echo json_encode($output);
-
-
-	 break;
+    echo json_encode($output);
+	break;
 
       case "activarydesactivar":
      
@@ -105,7 +91,7 @@
 
      case "listar":
 
-     $datos=$pacientes->get_pacientes();
+     $datos=$pacientes->get_pacientes($_POST["sucursal_paciente"]);
 
      //Vamos a declarar un array
  	 $data= Array();
@@ -128,10 +114,7 @@
 
                  
                  $sub_array[] = '<button type="button" onClick="editarp('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-edit btn-md"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-
-
-                 $sub_array[] = '<button type="button" onClick="eliminarp('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-dark btn-md"><i class="glyphicon glyphicon-remove"></i> Eliminar</button>';
-                
+                                
 				$data[] = $sub_array;
 			}
 

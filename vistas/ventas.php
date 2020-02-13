@@ -69,7 +69,6 @@
     <?php require_once("modal/lista_acc_ventas_modal.php");?>
     <?php require_once("modal/lista_ar_ventas_modal.php");?>
     <?php require_once("modal/lista_photo_ventas_modal.php");?>
-
     <?php require_once("modal/abono_inicial.php");?>
   <div>
       <nav class="navbar navbar-inverse">
@@ -126,10 +125,10 @@
     <div class="form-group row">
       <div class="col-xs-2">
         <label for="sel1">Tipo de Venta:</label>
-            <select class="form-control" id="tipo_venta" name="tipo_venta">
-                <option value="">Seleccione</option>
-                <option value="Credito">Crédito</option>
-                <option value="Contado">Contado</option>
+        <select class="form-control" id="tipo_venta" name="tipo_venta">
+          <option value="">Seleccione</option>
+          <option value="Credito">Crédito</option>
+          <option value="Contado">Contado</option>
         </select>
     </div>
 
@@ -162,11 +161,8 @@
 
     <div class="col-xs-3">
       <label for="sel1">Sucursal:</label>                
-      <select class="form-control" name="sucursal" id="sucursal" required>
-          <option  value="">Seleccione una sucursal</option>
-          <option  value="Metrocentro">Metrocentro</option>
-          <option  value="Santa Ana">Santa Ana</option>
-          <option  value="Empresarial">Empresarial</option>
+      <select class="form-control" name="sucursal" id="sucursal" required readonly>
+          <option  value="<?php echo $_SESSION["cedula"];?>"><?php echo $_SESSION["cedula"];?></option>
       </select>
     </div> 
 

@@ -35,15 +35,6 @@
   <link rel="stylesheet" href="../public/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="../public/plugins/iCheck/square/blue.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <style type="text/css">
@@ -158,7 +149,7 @@
           <select class="form-control" id="sucursal_login" name="sucursal_login">
             <option value="">Seleccione una Sucursal...</option>
             <option value="Metrocentro">Metrocentro</option>
-            <option value="Emresarial">Emresarial</option>
+            <option value="Empresarial">Empresarial</option>
             <option value="Santa Ana">Santa Ana</option>
           </select>
       </div>
@@ -168,16 +159,14 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
 
-       <div class="form-group">
-        <input type="hidden" name="enviar" class="form-control" value="si">
-       
+      <div class="form-group">
+        <input type="hidden" name="enviar" class="form-control" value="si">       
       </div>
-      <div class="row">
-        
+
+      <div class="row">        
         <div class="col-xs-7 col-xs-offset-3 col-sm-8 col-sm-offset-2 col-lg-8 col-lg-offset-2">
           <button type="submit" class="btn btn-navy btn-block btn-flat btn-lg"><i class="fa fa-power-off" aria-hidden="true"></i>  Iniciar Sesión</button>
         </div>
-        <!-- /.col -->
       </div>
     </form>
 
