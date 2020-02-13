@@ -96,7 +96,7 @@ if(isset($_SESSION["id_usuario"])){
         </thead>
 
         <tbody>
-        <td align="center"><select class='form-control' id='sucursal' name='sucursal'><option value='' required>Seleccione Sucursal</option><option value='Metrocentro'>Metrocentro</option><option value='Arce'>Arce</option><option value='Santa Ana'>Santa Ana</option></select></td></td>   
+        <td align="center"><select class='form-control' id='sucursal' name='sucursal'><option value='' required>Seleccione Sucursal</option><option value='Metrocentro'>Metrocentro</option><option value='Empresarial'>Empresarial</option><option value='Santa Ana'>Santa Ana</option></select></td></td>   
         <td><input type='text' class='form-control' id='paciente' name='paciente'></td>
           <td align="center"><select class='form-control' id='foptica' name='optica'><option value='' required>Seleccione</option><option value='Lomed'>Lomed</option><option value='PrismaLab'>PrismaLab</option><option value='OptiProcesos'>OptiProcesos</option></select></td></td>
         </tbody>

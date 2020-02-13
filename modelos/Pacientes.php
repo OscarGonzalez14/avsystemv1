@@ -11,7 +11,7 @@ public function get_pacientes(){
           $conectar=parent::conexion();
           parent::set_names();
 
-          $sql="select * from pacientes";
+          $sql="select*from pacientes order by id_paciente DESC";
 
           $sql=$conectar->prepare($sql);
           $sql->execute();

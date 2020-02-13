@@ -123,17 +123,15 @@
 <div class="row"><!--Row 2-->
   <div class="col-sm-1"></div>
   <div class="col-sm-10 row2">
-
     <div class="form-group row">
-
       <div class="col-xs-2">
-      <label for="sel1">Tipo de Venta:</label>
-        <select class="form-control" id="tipo_venta" name="tipo_venta">
-            <option value="">Seleccione</option>
-            <option value="Credito">Crédito</option>
-            <option value="Contado">Contado</option>
+        <label for="sel1">Tipo de Venta:</label>
+            <select class="form-control" id="tipo_venta" name="tipo_venta">
+                <option value="">Seleccione</option>
+                <option value="Credito">Crédito</option>
+                <option value="Contado">Contado</option>
         </select>
-      </div>
+    </div>
 
      
   <div class="col-xs-3">
@@ -167,7 +165,8 @@
       <select class="form-control" name="sucursal" id="sucursal" required>
           <option  value="">Seleccione una sucursal</option>
           <option  value="Metrocentro">Metrocentro</option>
-          <option  value="Santa Ana">Santa Ana</option>                     
+          <option  value="Santa Ana">Santa Ana</option>
+          <option  value="Empresarial">Empresarial</option>
       </select>
     </div> 
 
@@ -266,17 +265,42 @@
   </table>
  <div class="boton_registrar">
 <button type="button" onClick="registrarVenta()" class="btn btn-blue pull-right btn-block" id="btn_enviar"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Venta</button>
-<button type="button" class="btn btn-dark pull-right btn-block abono_ini" onClick="abono_inicial()"><i class="fa fa-save" aria-hidden="true"></i>  Abono Inicial</button>
+<button type="button" class="btn btn-dark pull-right btn-block abono_ini" onClick="recibo_uno()"><i class="fa fa-save" aria-hidden="true"></i>  Abono Inicial</button>
 </div>
 
-    </div> 
+</div> 
 
-  <div class="col-sm-1"></div>
+<div class="col-sm-1"></div>
 </div><!--Fin row -->
 
 <!--MODAL DE PRUEBA-->
-
-
+<div class="row">
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+    <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><strong>IMPRIMIR RECIBO INICIAL</strong></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <table id="recibos_data" class="table table-bordered table-striped dataTable no-footer dtr-inline collapsed">
+                <thead>
+                <tr>
+                  <th>No. Recibo</th>
+                  <th>Numero de Venta</th>
+                  <th>Paciente</th>
+                  <th>Imprimir</th>         
+                </tr>
+              </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</div>
+<div class="col-sm-1"></div>
+</div>
 <!--MODAL DE PRUEBA-->
 </div><!-- /.content-wrapper -->
  
@@ -293,6 +317,7 @@ h=n.getHours()+":"+n.getMinutes()+":"+n.getSeconds();
 
 //Lo ordenas a gusto.
 document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
+document.getElementById("hora").value = h;
  </script>
   
   <!--FIN DE CONTENIDO-->
@@ -324,10 +349,7 @@ document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
    <!--AJAX PRODUCTOS-->
 <script type="text/javascript" src="js/productos.js"></script>
 <script type="text/javascript" src="js/ventas.js"></script>
-
-
-
-
+<script type="text/javascript" src="js/recibos.js"></script>
 
 <?php
    
@@ -338,4 +360,6 @@ document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
      }
 
 ?>
+
+
 

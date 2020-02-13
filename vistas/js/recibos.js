@@ -10,13 +10,7 @@ function listar_recibos_print()
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [		          
-		            'copyHtml5',
-		            'excelHtml5',
-		           
-		            'pdf'
-		        ],
+	   
 		"ajax":
 				{
 					url: '../ajax/recibos.php?op=listar_recibos_print',
@@ -84,4 +78,75 @@ function listar_recibos_print()
 }
 
 
+ 
+function registra_abono_inicial(){
+    
+    var id_usuario = $("#id_usuario_ini").val();
+    var id_paciente = $("#id_paciente_ini").val();
+    var monto =$("#monto").val();
+    var num_recibo=$("#num_recibo").val();
+    var num_venta=$("#num_venta_rec_ini").val();
+    var sucursal =$("#sucursal").val();
+    var hora =$("#hora").val();
+    var telefono =$("#telefono").val();
+    var paciente =$("#nombres_ini").val();
+    var empresa =$("#empresa").val();
+    var cant_letras =$("#texto").val();
+    var abono_ant =$("#abono_ant").val();
+    var abono_act=$("#numero").val();
+    var saldo =$("#saldo").val();
+    var forma_pago =$("#forma_pago").val();
+    var marca_aro =$("#marca_aro").val();
+    var modelo_aro =$("#modelo_aro").val();
+    
+    var color_aro =$("#color_aro").val();
+    var lente =$("#dis_lente").val();
+    var tipo_ar =$("#tipo_ar").val();
+    var photo =$("#photo").val();
+    var observaciones =$("#observaciones").val();
+    var asesor =$("#usuario").val();
+    var prox_abono =$("#datepicker").val();
+    
+    
+
+    //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
+if(monto != "" ){
+    $.ajax({
+    url:"../ajax/recibos.php?op=registrar_abono_inicial",
+    method:"POST",
+    data:{num_recibo:num_recibo,num_venta:num_venta, monto:monto, sucursal: sucursal,id_paciente:id_paciente,id_usuario:id_usuario,hora:hora,telefono:telefono,paciente:paciente,empresa:empresa,cant_letras:cant_letras,abono_ant:abono_ant,abono_act:abono_act,saldo:saldo,forma_pago:forma_pago,marca_aro:marca_aro,modelo_aro:modelo_aro,color_aro:color_aro,lente:lente,tipo_ar:tipo_ar,photo:photo,observaciones:observaciones,asesor:asesor,prox_abono:prox_abono},
+    cache: false,
+    dataType:"html",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },        
+      
+  success:function(data){
+  var nombre_pac = $("#saldo").val("");
+  setTimeout ("bootbox.alert('Se ha Realizado el Abono con exito');", 100);
+  //refresca la pagina, se llama a la funtion explode
+  setTimeout ("explode();", 2000);          
+}
+
+  }); 
+
+  }else{
+    bootbox.alert("Debe llenar todos los campos");
+    return false;
+  } //cierre del condicional de validacion de los campos del paciente
+  
+    
+  }   
+
+  //*****************************************************************************
+   /*RESFRESCA LA PAGINA DESPUES DE REGISTRAR LA VENTA*/
+       function explode(){
+
+      location.reload();
+}
+
+
 init();
+

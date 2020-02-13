@@ -8,6 +8,22 @@ function init(){
 	listar_acc_bodega();
 }
 
+
+$(document).ready(function(){
+	$("#sucursal").change(function () {
+
+					
+		$("#sucursal option:selected").each(function () {
+			id_tipo = $(this).val();
+			$.post('../ajax/bodegas.php?op=select-sucursal', { id_tipo: id_tipo }, function(data){
+				$("#ubicaciong").html(data);
+			});            
+		});
+	})
+});
+
+
+
 function listar_en_bodegas(){
 
 	tabla_en_bodegas = $('#lista_productos_bodegas_data').dataTable(
@@ -217,7 +233,7 @@ function listarDetallesBodegas(){
   	
   	for(var i=0; i<detalles.length; i++){
 		            
-        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalles[i].modelo+" - Color: "+detalles[i].color+" - Medidas: "+detalles[i].medidas+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'></td> <td> <input type='hidden' name='cod_prod' id='cod_prod' value='"+detalles[i].codProd+"'></td></tr>";
+        var filas = filas + "<tr><td>"+(i+1)+"</td></td><td name='modelo[]'>"+"Mod.: "+detalles[i].modelo+" - Color: "+detalles[i].color+" - Medidas: "+detalles[i].medidas+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'></td><td> <input type='hidden' name='cod_prod' id='cod_prod' value='"+detalles[i].codProd+"'></td></tr>";
 		
 	}//cierre for
 
@@ -227,7 +243,53 @@ function listarDetallesBodegas(){
   }
 
 
-  var detalles= [];	
+  var detalleacc = [];	
+	function agregarDetalle_accBodega(id_producto){
+	$.ajax({
+	url:"../ajax/bodegas.php?op=buscar_acces_bodega",
+	method:"POST",
+	data:{id_producto:id_producto},
+	cache: false,
+	dataType:"json",
+
+	success:function(data){                       
+        if(data.id_producto){
+			if (typeof data == "string"){
+				data = $.parseJSON(data);
+		}
+		console.log(data);
+		                
+		var obj = {
+			cantidad : 1,
+			codProd  :  id_producto,
+			marca    :  data.marca,
+			modelo    :  data.modelo			
+		};		                
+	
+	detalleacc.push(obj);
+	listarDetalles_acc_Bodegas();
+
+	$('#lista_acc_bodegas_Modal').modal("hide");
+
+	}//if validacion id_producto
+
+        else {
+
+        	alert(data.error);
+        }
+                  
+    }//fin success		
+
+	});//fin de ajax
+			
+}// fin de funcion
+
+
+////AGREGA DETALLE DE ACCESORIOS
+
+
+
+var detalles= [];	
 	function agregarDetalle_accBodega(id_producto){
 	$.ajax({
 	url:"../ajax/bodegas.php?op=buscar_acces_bodega",
@@ -289,31 +351,13 @@ function listarDetalles_acc_Bodegas(){
   }
 
 
-    function setCantidad(event, obj, idx){
-  	event.preventDefault();
-  	detalles[idx].cantidad = parseInt(obj.value);
-  	recalcular(idx);
-  }
-
- 	function  eliminarProd(event, idx){
-  		event.preventDefault();
-  		console.log('ELIMINAR Eyter');
-  		detalles[idx].estado = 0;
-}
-
-function deleteRow(r) {
-  var i = r.parentNode.parentNode.rowIndex;
-  document.getElementById("tabla_bodegas").deleteRow(i);
-}
-
-
 function updateBodega(){
 
     var sucursal = $("#sucursal").val();
     var id_producto =$('#cod_prod').val();
     var ubicaciong =$('#ubicaciong').val();
 
-    if(sucursal!="" || ubicaciong != ""){
+    if(sucursal!="" && ubicaciong != ""){
     console.log('error.Oscar');
     $.ajax({
 		url:"../ajax/producto.php?op=update_warehouse",
@@ -342,7 +386,7 @@ function updateBodega(){
 
 	 } else{
 
-	 	alert("Debe seleccionar bodega");
+	 	alert("Debe seleccionar bodega y ubicación");
 	 	 return false;
 	 } 	
 	
@@ -356,8 +400,6 @@ function updateBodega(){
 
 	    location.reload();
 }
-
-
 
 
  init();  	

@@ -16,7 +16,7 @@
       <th class="all" style="white-space: nowrap;">id</th>
       <th class="all" style="white-space: nowrap;">Marca</th>
       <th class="all" style="white-space: nowrap;">Descripcion</th>
-      <th class="all" style="white-space: nowrap;">Agregar</th>
+      <th class="all" style="white-space: nowrap;">Eliminar</th>
     </tr>
   </thead>  
 </table>

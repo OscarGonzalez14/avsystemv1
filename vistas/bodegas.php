@@ -30,6 +30,8 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="productos.php">Regresar</a></li>
+    <li class="breadcrumb-item"><a href="mov_internos.php">Movimientos Internos</a></li>
+    <li class="breadcrumb-item"><a href="tras_suc.php">Traslados a Sucursal</a></li>
     <li class="breadcrumb-item active" aria-current="page">Bodegas</li>
   </ol>
 </nav>
@@ -53,9 +55,10 @@
 
 <div class="tabla-planes"><!--Items Productos-->
   <form>
-  <div class="row">
+      
+        <div class="row">
     <div class="form-group has-success col-sm-6">
-      <label for="sucursal">Seleccionar Bodega</label>
+      <label for="sucursal">Bodega</label>
       <select id="sucursal" class="form-control form-control-success" style="border-color: #5bc0de; border: solid 2px #5bc0de">
         <option selected value="">Seleccionar</option>
         <option value="Metrocentro">Metrocentro</option>
@@ -66,13 +69,20 @@
 
     <div class="form-group has-success col-sm-6">
       <label for="ubicacion">Ubicacion</label>
-      <select id="ubicaciong" class="form-control form-control-success" style="border-color: #5bc0de; border: solid 2px #5bc0de">
-        <option selected value="">Seleccionar Ubicacion</option>
-        <option value="Gav#24">Gav#24</option>
-        <option value="Caja 2">Caja 2</option>
+      <select id="ubicaciong" class="form-control form-control-success" style="border-color: #5bc0de; border: solid 2px #5bc0de">        
     </select>
     </div>
 </div>
+
+
+    
+</div>
+
+<div class="row">
+    
+    <div class='col-sm-2'></div>
+    
+    <div class='col-sm-8'>
 
   <div style="overflow-x:auto;">
   <table class="w3-table w3-bordered" id="tabla_bodegas">
@@ -90,12 +100,25 @@
 
   </table>
 </div>
+</div>
 <br>
-<button type="button" class="btn btn-primary btn-block" onclick="updateBodega()">Registrar Ingreso</button>
+
 </form>
 </div><!-- Fin Items Productos-->
 <br>
-<br>  
+<div class='row'>
+    <div class='col-sm-4'></div>
+    <div class='col-sm-4'>
+        <button type="button" class="btn btn-block" style='background:black; border-radius:0px;color:white' onclick="updateBodega()">Registrar Ingreso</button>
+    </div>
+    <div class='col-sm-4'></div>
+</div>
+    <div class='col-sm-2'></div>
+</div><!--finrow--->
+
+<br>
+<br>
+   
   <div class="row">
   <div class="col-sm-1"></div>
         <div class="col-sm-10">
@@ -145,6 +168,11 @@
    
   ?><!--CIERRE DE SESSION DE PERMISO --><!--
 <script type="text/javascript" src="js/bodegas.js"></script>-->
+
+
+
+
+
 
 
 

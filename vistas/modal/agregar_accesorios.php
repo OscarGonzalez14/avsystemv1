@@ -19,6 +19,7 @@
           <option value="Estuches">Estuches</option>
           <option value="Franelas">Franelas</option>
           <option value="Soluciones">Soluciones</option>
+          <option value="Lentes de contacto">Lentes de contacto</option>
         </select>
       </div>
       <div class="col-xs-10">
@@ -37,11 +38,10 @@
       </div>
 
       <div class="col-xs-4">
-        <label for="ex1">Ubicacion</label>
+        <label for="ex1">Ubicacion caja</label>
         <select class="form-control" id="ubicacion_acc" name="ubicacion_acc">
-          <option value="Caja 1">Caja 1</option>
-          <option value="Caja 2">Caja 2</option>
-          <option value="Caja 3">Caja 3</option>
+          <option value="null">null</option>
+          
         </select>
       </div>
 

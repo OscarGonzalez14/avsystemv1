@@ -134,15 +134,16 @@
 
 	if ($_POST['id_tipo']=='Contado') {
 		$html="
-			<option value='contado'>Seleccionew</option>
-			";
-	
+			<option value='Contado'>Contado</option>
+			<option value='Efectivo'>Efectivo</option>
+			<option value='Tarjeta de Credito'>Tarjeta de Crédito</option>			
+			<option value='Cheque'>Cheque</option>";
 		echo $html;
 
 	}elseif($_POST['id_tipo']=='Credito'){
 	
 	$html= "
-		<option value='prueba'>Selecione</option>
+		<option value=''>Selecione</option>
 		<option value='Descuento en Planilla'> Descuento en Planilla</option>
 	 	<option value='Cargo Automatico'>Cargo Automático</option>
 	 	<option value='Creditos Personales'>Créditos Personales</option>
@@ -152,7 +153,7 @@
 		echo $html;
 		}else{
 
-	$html= "<option value='prueba'>Seleccione</option>
+	$html= "<option value=''>Seleccione</option>
 	";
 	
 		echo $html;
@@ -166,7 +167,7 @@
 
   		$html="
 
-			<option value='prueba'>Seleccione</>
+			<option value=''>Seleccione</>
 			<option value='2'> 2 Meses</>
 			<option value='3'> 3 Meses</>
 			<option value='4'> 4 Meses</>
@@ -187,10 +188,17 @@
 
   		$html="
 
-			<option value='prueba'>Seleccione</>
+			<option value=''>Seleccione</>
+			<option value='2'> 2 Meses</>
 			<option value='3'> 3 Meses</>
+			<option value='4'> 4 Meses</>
+			<option value='5'> 5 Meses</>
 			<option value='6'> 6 Meses</>
+			<option value='7'> 7 Meses</>
+			<option value='8'> 8 Meses</>
 			<option value='9'> 9 Meses</>
+			<option value='10'> 10 Meses</>
+			<option value='11'> 11 Meses</>
 			<option value='12'> 12 Meses</>
 			
   		";
@@ -200,7 +208,7 @@
   		}else if($_POST['m_cuotas']=='Creditos Personales'){
 
   			$html="
-			<option value='prueba'>Seleccione</>
+			<option value=''>Seleccione</>
 			<option value='1'> 1 Meses</>
 			<option value='2'> 2 Meses</>
 			<option value='3'> 3 Meses</>
@@ -678,13 +686,18 @@ case "ver_ultima_venta_lentes":
     foreach($datos as $row)
 			{
 				$sub_array = array();
+
+
+
+
 				  //STOCK, si es mejor de 10 se pone rojo sino se pone verde
 				  $stock=""; 
 
 				  if($row["stock"]<=5){
                       
                      $stock = $row["stock"];
-                     $atributo = "badge bg-red-active";                            
+                     $atributo = "badge bg-red-active";
+                            
 				 
 				  } else {
 
@@ -705,7 +718,6 @@ case "ver_ultima_venta_lentes":
       
 
 			$sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-primary btn-md " onClick="agregarDetalleVenta('.$row["id_producto"].','.$row["id_ingreso"].')"><i class="fa fa-plus"></i> Agregar</button>';
-        
 			
 				$data[] = $sub_array;
 			 

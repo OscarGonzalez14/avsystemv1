@@ -79,6 +79,7 @@ public function get_accesorios(){
     $sql->execute();
     return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
   }     
+    
 
   public function get_ar_ventas(){
 
@@ -136,7 +137,7 @@ public function get_accesorios(){
             parent::set_names();
 
             require_once("Productos.php");
-            
+
 
             $imagen_producto = new Producto();
 
@@ -172,33 +173,67 @@ public function get_accesorios(){
 
         }
 
+
+
          //obtiene el registro por id despues de editar
         public function get_producto_por_id($id_producto){
 
           $conectar= parent::conexion();
+
           //$output = array();
+
             $sql="select * from producto where id_producto=?";
+
             $sql=$conectar->prepare($sql);
+
             $sql->bindValue(1, $id_producto);
             $sql->execute();
 
             return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
         }
 
-         //obtiene el registro por id despues de editar
-        public function get_producto_por_id_existencia($id_producto){
+
+//////////////////seleccioinar productos para venta 
+
+public function get_lente_por_id($id_producto){
 
           $conectar= parent::conexion();
+
           //$output = array();
+
             $sql="select * from producto where id_producto=?";
+
             $sql=$conectar->prepare($sql);
+
             $sql->bindValue(1, $id_producto);
             $sql->execute();
 
             return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-        }        
 
-        public function get_lente_por_id($id_producto){
+
+        }
+        
+public function get_photos_por_id($id_producto){
+
+          $conectar= parent::conexion();
+
+          //$output = array();
+
+            $sql="select * from producto where id_producto=?";
+
+            $sql=$conectar->prepare($sql);
+
+            $sql->bindValue(1, $id_producto);
+            $sql->execute();
+
+            return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
+        }        
+        
+public function get_ars_por_id($id_producto){
 
           $conectar= parent::conexion();
 
@@ -355,7 +390,6 @@ public function get_accesorios(){
 
 
        //editar estado de la categoria por producto
-
         public function editar_estado_categoria_por_producto($id_categoria,$estado){
 
           $conectar=parent::conexion();
@@ -387,27 +421,7 @@ public function get_accesorios(){
           
     }
 
-    //metodo para consultar si la tabla productos tiene registros asociados con categorias
-    public function get_prod_por_id_cat($id_categoria){
-
-      $conectar= parent::conexion();
-
-      //$output = array();
-
-      $sql="select * from producto where id_categoria=?";
-
-            $sql=$conectar->prepare($sql);
-
-            $sql->bindValue(1, $id_categoria);
-            $sql->execute();
-
-            return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-
-          
-          }
-
-
-                 //consulta si el id del producto con tiene un detalle_compra asociado
+ //consulta si el id del producto con tiene un detalle_compra asociado
     public function get_producto_por_id_detalle_compra($id_producto){
 
              
@@ -458,8 +472,7 @@ public function get_accesorios(){
         public function eliminar_producto($id_producto){
 
         $conectar=parent::conexion();
-
-              $sql="delete from producto where id_producto=?";
+        $sql="delete from producto where id_producto=?";
 
               $sql=$conectar->prepare($sql);
 
@@ -546,7 +559,7 @@ public function agrega_detalle_warehouse(){
 
     }else{
 
-     $sql="insert into existencias values (null,?,?,?,?);";
+     $sql="insert into existencias values (null,?,?,?,?,CURRENT_TIMESTAMP);";
 
 
         $sql=$conectar->prepare($sql);
@@ -565,7 +578,7 @@ public function get_existencias(){
 
   $conectar= parent::conexion();
        
-  $sql= "select p.id_producto,p.modelo, p.marca,p.medidas,p.color, e.stock,e.bodega,e.categoriaub, e.id_ingreso from producto as p inner join existencias as e on p.id_producto=e.id_producto order by e.id_ingreso DESC;
+  $sql= "select p.id_producto,p.modelo, p.marca,p.medidas,p.color, e.stock,e.bodega,e.categoriaub,e.id_ingreso from producto as p inner join existencias as e on p.id_producto=e.id_producto order by e.id_ingreso desc;
 ";
 
       $sql=$conectar->prepare($sql);

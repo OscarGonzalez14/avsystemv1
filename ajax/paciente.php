@@ -26,42 +26,11 @@
 
      case "guardaryeditar":
 
-	    if(empty($_POST["id_paciente"])){
-
-           $datos = $pacientes->valida_registro($_POST["telefono"]);
-
-
-			if(is_array($datos)==true and count($datos)==0){
+			
 
 			$pacientes->registrar_paciente($codigo,$nombres,$telefono,$edad,$ocupacion,$empresa,$correo,$id_usuario);
 
-			       	   	  $messages[]="El Paciente se registró correctamente";
-
-			     } //cierre de validacion de $datos
-
-			       	      /*si ya existes el paciente entonces aparece el mensaje*/
-				              else {
-
-				    $errors[]="El Paciente ya existe";
-				              //}
-
-			 }//cierre de empty
-
-	      // else {
-
-	     //$pacientes->editar_paciente($telefono,$edad,$ocupacion,$empresa,$correo,$id_usuario,$id_paciente);
-
-    //$messages[]="El paciente se editó correctamente";
-//
-	            	 
-       }
-
-    
-      
-     //mensaje success
-    
-
-	 //fin mensaje error
+			       	   	  
 
 	
      break;
@@ -249,6 +218,8 @@
 		       }
 		      
    	 // }
+
+
 
 
 	//prueba mensaje de success

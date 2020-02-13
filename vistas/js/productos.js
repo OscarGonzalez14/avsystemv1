@@ -423,12 +423,14 @@ function listar_en_compras(){
 	 var filas = filas + "<tr><td>"+(i+1)+"</td> <td name='modelo[]'>"+detalles[i].modelo+"</td> <td name='marca[]'>" +detalles[i].marca+"</td> <td name='color[]'>" +detalles[i].color+"</td><td>"+detalles[i].stock+"</td><td><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'></td> <td>  <button href='#' class='btn btn-danger btn-lg deleteDep' role='button' aria-pressed='true'><span class='glyphicon glyphicon-trash'></span> </button></td> </tr>";
 
 	}
+
 	
 	$('#listProdCompras').html(filas);
 
 	
       
   }
+
 
   function setCantidad(event, obj, idx){
   	event.preventDefault();
@@ -758,6 +760,7 @@ function listar_acc_en_ventas(){
 	}).DataTable();
 }
 
+
 function listar_photo_en_ventas(){
 
 	tabla_photo_ventas=$('#lista_photo_ventas_data').dataTable(
@@ -839,7 +842,6 @@ function listar_photo_en_ventas(){
 
 var detalles = [];
 
-
 function agregarDetalleVenta_lente(id_producto){
 		       $.ajax({
 				url:"../ajax/producto.php?op=buscar_producto_lente_venta",
@@ -875,8 +877,81 @@ function agregarDetalleVenta_lente(id_producto){
 
 				});//fin de ajax		
 		    
-		  }// fin de funcion
+		  }
+function agregarDetalleVenta_ar(id_producto){
+		       $.ajax({
+				url:"../ajax/producto.php?op=buscar_ars_en_venta",
+				method:"POST",
 
+				data:{id_producto:id_producto},
+				cache: false,
+				dataType:"json",
+
+				success:function(data){                     
+        
+					var obj = {
+						cantidad : 1,
+						codProd  : id_producto,
+						modelo   : data.modelo,	
+						marca    : data.marca,
+						color    : data.color,				
+						medidas	 : data.medidas,						
+						precio_venta   : data.precio_venta,
+						stock    : data.stock,
+						importe  : 0,
+						dscto    : 0,
+						moneda   : '$'
+							
+					};
+
+					detalles.push(obj);
+					listarDetallesVentas();						
+					$('#lista_ar_ventas_Modal').modal("hide"); 
+        
+                   						
+					}//fin success		
+
+				});//fin de ajax		
+		    
+		  }
+		  
+function agregarphotosDetalleVenta(id_producto){
+		       $.ajax({
+				url:"../ajax/producto.php?op=buscar_photos_para_venta",
+				method:"POST",
+
+				data:{id_producto:id_producto},
+				cache: false,
+				dataType:"json",
+
+				success:function(data){                     
+        
+					var obj = {
+						cantidad : 1,
+						codProd  : id_producto,
+						modelo   : data.modelo,	
+						marca    : data.marca,
+						color    : data.color,				
+						medidas	 : data.medidas,						
+						precio_venta   : data.precio_venta,
+						stock    : data.stock,
+						importe  : 0,
+						dscto    : 0,
+						moneda   : '$'
+							
+					};
+
+					detalles.push(obj);
+					listarDetallesVentas();						
+					$('#lista_photo_ventas_Modal').modal("hide");         
+
+        
+                   						
+					}//fin success		
+
+				});//fin de ajax		
+		    
+		  }		  
 	
 function agregarDetalleVenta(id_producto,id_ingreso){
 		       $.ajax({
@@ -924,6 +999,8 @@ function agregarDetalleVenta(id_producto,id_ingreso){
 		  }// fin de funcion
 
 
+
+
 //***********************************************************************
 
 
@@ -944,7 +1021,7 @@ function agregarDetalleVenta(id_producto,id_ingreso){
 	//var importe = detalles[i].importe = detalles[i].cantidad * detalles[i].precio_venta;    
  	//importe = detalles[i].importe = detalles[i].importe - (detalles[i].importe * detalles[i].dscto/100);
  	//var descmoney = detalles[i].precio_venta-detalles[i].importe;
-	var filas = filas + "<tr><td>"+(i+1)+"</td></td><td> <input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'> </td>  <td name='descripcion[]' id='descripcion[]'>"+detalles[i].modelo+"<td><input type='number' name='descuento[]' id='descuento[]' onClick='setDescuento(event, this, "+(i)+");' onKeyUp='setDescuento(event, this, "+(i)+");' value='"+detalles[i].dscto+"'></td><td name='precio_venta[]'>"+detalles[i].moneda+" "+detalles[i].precio_venta+"</td> <td> <span name='importe[]' id=importe"+i+">"+detalles[i].moneda+" "+detalles[i].importe+"</span> </td></tr>";
+	var filas = filas + "<tr><td>"+(i+1)+"</td></td><td> <input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'> </td>  <td name='descripcion[]' id='descripcion[]'>"+detalles[i].marca+" "+detalles[i].modelo+"<td><input type='text' name='descuento[]' id='descuento[]' onClick='setDescuento(event, this, "+(i)+");' onKeyUp='setDescuento(event, this, "+(i)+");' value='"+detalles[i].dscto+"'></td><td name='precio_venta[]'>"+detalles[i].moneda+" "+detalles[i].precio_venta+"</td> <td> <span name='importe[]' id=importe"+i+">"+detalles[i].moneda+" "+detalles[i].importe+"</span> </td></tr>";
 	
     subtotal = subtotal + importe;
 
@@ -1076,8 +1153,8 @@ obj.value es el valor del campo de texto*/
   	console.log(detalles[idx].cantidad);
   	console.log((detalles[idx].cantidad * detalles[idx].precio_venta));
 
-    //var importe =detalles[idx].importe = detalles[idx].cantidad * detalles[idx].precio_venta;
-	importe = detalles[idx].importe = detalles[idx].importe - (detalles[idx].importe * detalles[idx].dscto/100);
+    var importe =detalles[idx].importe = detalles[idx].cantidad * detalles[idx].precio_venta;
+	//importe = detalles[idx].importe = detalles[idx].importe - (detalles[idx].importe * detalles[idx].dscto/100);
 	importe = detalles[idx].importe = detalles[idx].importe - (detalles[idx].dscto);
 	
  	importeFinal = detalles[idx].moneda+" "+importe;	    
@@ -1102,8 +1179,8 @@ obj.value es el valor del campo de texto*/
 
 for(var i=0; i<detalles.length; i++){
 
-	subtotal = subtotal + (detalles[i].cantidad * detalles[i].precio_venta) - (detalles[i].cantidad*detalles[i].precio_venta*detalles[i].dscto/100);
-	//subtotal = subtotal + (detalles[i].cantidad * detalles[i].precio_venta) - (detalles[i].dscto);
+	//subtotal = subtotal + (detalles[i].cantidad * detalles[i].precio_venta) - (detalles[i].cantidad*detalles[i].precio_venta*detalles[i].dscto/100);
+	subtotal = subtotal + (detalles[i].cantidad * detalles[i].precio_venta) - (detalles[i].dscto);
 
           subtotalFinal = subtotal;
 
@@ -1145,6 +1222,15 @@ obj.value es el valor del campo de texto*/
   	}
 
 
+
+ //********************************************************************
+ 
+
+
+/* {'arrayCompra':JSON.stringify(detalles)}:Esa parte encapsula el arreglo detalles y lo envía como un solo parametro
+
+*/
+
  function registrarVenta(){
     
     /*IMPORTANTE: se declaran las variables ya que se usan en el data, sino da error*/
@@ -1165,7 +1251,7 @@ obj.value es el valor del campo de texto*/
 
     //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
 
-    if(nombre_pac!=""){
+    if(nombre_pac!="" && sucursal!="" && tipo_venta!=""){
 
     $("#descuento").attr('disabled', 'disabled');
      console.log('error!');
@@ -1192,10 +1278,9 @@ obj.value es el valor del campo de texto*/
             $('#listProdVentas').html('');
             
               //muestra un mensaje de exito
-          setTimeout ("bootbox.alert('Se ha registrado la venta con éxito');", 100); 
-          
-          //refresca la pagina, se llama a la funtion explode
-          setTimeout ("explode();", 2000); 
+          //setTimeout ("bootbox.alert('Se ha registrado la venta con éxito');", 100); 
+        //Se carga la modal de abono inicial  
+        setTimeout ("recibo_uno();", 1500); 
          	
 		}
 
@@ -1219,8 +1304,72 @@ obj.value es el valor del campo de texto*/
 
 	    location.reload();
 }
+function recibo_uno(){
+//document.getElementById('search_pac').style.display = 'none';
+//document.getElementById('btn_enviar').style.display = 'none';
+$('#detalle_abonos').modal("show");
+
+var sucursal = document.getElementById('sucursal').value;
+
+    $.ajax({
+      url:"../ajax/recibos.php?op=get_numero_recibo",
+      method:"POST",
+      data:{sucursal:sucursal},
+      cache:false,
+      dataType:"json",
+      success:function(data)
+      {
+        $("#num_recibo").val(data.numero_rec);
+
+      }
+    });
+
+    recibo_uno_datos_pac();
+ }
+
+function recibo_uno_datos_pac(){
+//$('#detalle_abonos').modal("show");
+var sucursal = document.getElementById('sucursal').value;
+
+    $.ajax({
+      url:"../ajax/recibos.php?op=get_datos_recibo_inicial",
+      method:"POST",
+      data:{sucursal:sucursal},
+      cache:false,
+      dataType:"json",
+      success:function(data)
+      {
+        $("#num_venta_rec_ini").val(data.numero_venta);
+        $("#monto").val(data.subtotal);
+        $("#telefono").val(data.telefono);
+        $("#nombres_ini").val(data.nombres);
+        $("#id_paciente_ini").val(data.id_paciente);
 
 
+      }
+    });
+    get_datos_aros_recibo_inicial()
+ }
+
+
+
+function get_datos_aros_recibo_inicial(){
+
+var numero_venta = document.getElementById('numero_venta').value;
+    $.ajax({
+      url:"../ajax/recibos.php?op=get_datos_recibo_aros",
+      method:"POST",
+      data:{numero_venta:numero_venta},
+      cache:false,
+      dataType:"json",
+      success:function(data)
+      {
+        $("#marca_aro").val(data.marca);
+        $("#modelo_aro").val(data.modelo);
+        $("#color_aro").val(data.color);
+      }
+    });
+ }
  //ELIMINAR PRODUCTOS
 
 	 function eliminar(id_producto){
@@ -1251,7 +1400,140 @@ obj.value es el valor del campo de texto*/
    }
 /////////////ENVIOS****************///////////
    //este es un arreglo vacio
+	var detallesE = [];
+
 	
+	 function agregarDetalleEnvio(id_producto){
+
+	 	//alert(estado);
+	 			//var suc_origen = $('#sucursal_origen');
+		        $.ajax({
+					url:"../ajax/producto.php?op=buscar_producto",
+					 method:"POST",
+
+					data:{id_producto:id_producto},
+					cache: false,
+					dataType:"json",
+
+					success:function(data){
+                     
+						var obj = {
+							cantidad : 1,
+							codProd  : id_producto,
+							modelo   : data.modelo,
+							marca    : data.marca,
+							color    : data.color,
+							stock    : data.stock,
+														
+						};
+		                
+   
+						detallesE.push(obj);
+						listarDetalleEnvios();
+
+						$('#modalEnvios').modal("hide");
+
+                      // }//if validacion id_producto
+
+                       
+						
+					}//fin success		
+
+				});//fin de ajax
+			
+		    
+		  }// fin de funcion
+		  
+
+function listarDetalleEnvios(){
+
+  	  
+  	$('#listProdEnvios').html('');
+
+  
+
+  	var filas = ""; 	
+
+      
+
+  	for(var i=0; i<detallesE.length; i++){
+
+  	
+
+	 var filas = filas + "<tr><td colspan='1'>"+(i+1)+"</td> <td name='modelo[]' colspan='2'>"+detallesE[i].modelo+"</td> <td name='marca[]' colspan='1'>" +detallesE[i].marca+"</td> <td name='color[]' colspan='2'>" +
+	 detallesE[i].color+"</td><td colspan='1'><input type='number' class='cantidad input-group-sm' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+
+	 (i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detallesE[i].cantidad+
+	 "'></td> </tr>";
+
+	}
+
+	
+	$('#listProdEnvios').html(filas);
+
+	
+      
+  }
+
+  function registrarIngreso(){
+    
+    /*IMPORTANTE: se declaran las variables ya que se usan en el data, sino da error*/
+    var sucursal_origen = $("#sucursal_origen").val();
+    var sucursal_destino = $("#sucursal_destino").val();
+    var numero_envio = $("#numero_envio").val();
+
+    //var comprador = $("#comprador").html();
+  
+    var id_usuario = $("#id_usuario").val();
+ 
+	if(sucursal_origen==sucursal_destino){
+ 		
+ 		alert("Revise las Sucursales de Origen y Destino");
+	 	 return false;
+	} 
+    	//if(detallesE != "")
+    	else{
+    
+
+     console.log('Proof');
+   
+    $.ajax({
+		url:"../ajax/envios.php?op=registrar_ingreso",
+		method:"POST",
+		data:{'arrayIngreso':JSON.stringify(detallesE), 'sucursal_origen':sucursal_origen,'sucursal_destino':sucursal_destino,'id_usuario':id_usuario,'numero_envio':numero_envio},
+		cache: false,		
+		dataType:"html",
+		error:function(x,y,z){
+			console.log(x);
+			console.log(y);
+			console.log(z);
+		},
+         
+
+		success:function(data){
+
+			console.log(data);
+                         
+            detalles = [];
+            $('#listProdEnvios').html('');
+
+
+
+          setTimeout ("bootbox.alert('Se ha registrado el envio con éxito');", 100); 
+          
+ 
+          setTimeout ("explode();", 2000); 
+
+         	
+		}
+
+
+	});	
+
+	 //cierre del condicional de validacion de los campos del producto,proveedor,pago
+
+	 }	
+	
+  }
 //Función Listar
 function listar_existencias()
 {
@@ -1333,6 +1615,10 @@ function listar_existencias()
 	}).DataTable();
 }
  init();
+
+
+
+
 
 
 

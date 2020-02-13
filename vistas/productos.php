@@ -19,7 +19,7 @@
   require_once("header.php");
 ?>
 
-<?php require_once("modal/agregar_lentes.php");?>
+
     <?php if($_SESSION["productos"]==1)
      {
 
@@ -41,6 +41,9 @@
     <div id="resultados_ajax"></div>
 
     <?php require_once("modal/agregar_accesorios.php");?>
+    <?php require_once("modal/agregar_lentes.php");?>
+    <?php require_once("modal/agregar_ar.php");?>
+<?php require_once("modal/agregar_photo.php");?> 
 
              <h2 align="center">INVENTARIO</h2>
 
@@ -67,7 +70,8 @@
 
             <a href="bodegas.php"><button class="btn btn-edit btn-md" id="add_button" onclick="limpiar()"<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Bodegas</button></h1></a>
 
-           <a href="envios.php"><button class="btn btn-dark btn-md" id="add_button" id="add_button" data-toggle="modal" data-target="#orden_envio"><span class="glyphicon glyphicon-share-alt"></span> Envios</button></h1></a>              
+      <a href="mov_internos.php"><button class="btn btn-dark btn-md" id="add_button" id="add_button" data-toggle="modal" data-target="#orden_envio"><span class="glyphicon glyphicon-refresh"></span> Mov. Internos</button></h1></a>
+       <a href="tras_suc.php"><button class="btn btn-dark btn-md" id="add_button" id="add_button" data-toggle="modal" data-target="#orden_envio"><span class="glyphicon glyphicon-plane"></span> Traslados</button></h1></a>
 
                         <div class="box-tools pull-right">
 
@@ -162,46 +166,7 @@
         <label>Categoría</label>
     <select class="form-control" id="categoria-u" name="categoriau">
     <option value="null">-- categoría --</option>
-    <option value="ME#28 ANDVAS ACETATO #15">ME#28 ANDVAS ACETATO #15</option>
-    <option value="ME#28 ANDVAS ACETATO #14">ME#28 ANDVAS ACETATO #14</option>
-    <option value="ME#28 ANDVAS ACETATO #13">ME#28 ANDVAS ACETATO #13</option>
-    <option value="ME#27 MARCAS #12">ME#27 MARCAS #12</option>
-    <option value="ME#27 CONVERSE #11">ME#27 CONVERSE #11</option>
-    <option value="ME#27 CONVERSE #10">ME#27 CONVERSE #10</option>
-    <option value="ME#27 METAL #9">ME#27 METAL #9</option>
-    <option value="ME#27 METAL #8">ME#27 METAL #8</option>
-    <option value="ME#27 METAL #7">ME#27 METAL #7</option>
-    <option value="ME#27 METAL #6">ME#27 METAL #6</option>
-    <option value="ME#27 ANDVAS #5">ME#27 ANDVAS #5</option>
-    <option value="ME#27 ANDVAS #4">ME#27 ANDVAS #4</option>
-    <option value="ME#27 ANDVAS #3">ME#27 ANDVAS #3</option>
-    <option value="ME#27 ANDVAS #2">ME#27 ANDVAS #2</option>
-    <option value="ME#27 ANDVAS #1">ME#27 ANDVAS #1</option>
-    <option value="Gav#25 Marca y sin marca, Natación/Industrial">Gav#25 Marca y sin marca, Natación/Industrial</option>
-    <option value="Gav#24 Economico Masculino, Todo tamaño, Metalico Completo">Gav#24 Economico Masculino, Todo tamaño, Metalico Completo</option>
-    <option value="Gav#23 Economico Masculino">Gav#23 Economico Masculino</option>
-    <option value="Gav#22 Economico Femenino/Masculino, Todo Tamaño, Aereo y SemiAereo">Gav#22 Economico Femenino/Masculino, Todo Tamaño, Aereo y SemiAereo</option>
-    <option value="Gav#21 Economico Femenino, Todo Tamaño, Metalico completo">Gav#21 Economico Femenino, Todo Tamaño, Metalico completo</option>    
-    <option value="Gav#20 Marcas, Masculino, Todo tamaño Metalico Completo">Gav#20 Marcas, Masculino, Todo tamaño Metalico Completo</option>
-    <option value="Gav#19 Marcas, Masculino, Todo tamaño Metalico Semi-Aereo">Gav#19 Marcas, Masculino, Metalico Semi-Aereo</option>
-    <option value="Gav#18 Lentes de sol">Gav#18 Lentes de sol"</option>
-    <option value="Gav#17 Economicos">Gav#17 Economicos"</option>
-    <option value="Gav#16 AndVas todo color, Fem/Masc, Acetato Completo">Gav#16 AndVas todo color, Fem/Masc, Acetato Completo"</option>
-    <option value="Gav#15 AndVas todo color, Fem/Masc, Acetato Completo">Gav#15 AndVas todo color, Fem/Masc, Acetato Completo"</option>
-    <option value="Gav#14 AndVas todo color, Fem/Masc, Acetato Completo">Gav#14 AndVas todo color, Fem/Masc, Acetato Completo"</option>
-    <option value="Gav#13 RayBan, Masculino, Mediano/pequeño, Acetato/Completo">Gav#13 RayBan, Masculino, Mediano/pequeño, Acetato/Completo"</option>
-    <option value="Gav#12 RayBan, Masculino, Mediano/pequeño, Acetato/Completo">Gav#12 RayBan, Masculino, Mediano/pequeño, Acetato/Completo"</option>
-    <option value="Gav#11 Marcas,Deportivos, Maculino, med/grande, Ace/termopla">Gav#11 Marcas,Deportivos, Maculino, med/grande, Ace/termopla</option>
-    <option value="Gav#10 Marcas, masculino, mediano/pequeño Acetato">Gav#10 Marcas, masculino, grande Acetato</option>
-    <option value="Gav#9 Marcas, masculino, grande Acetato">Gav#9 Marcas, masculino, grande Acetato</option>
-    <option value="Gav#8 Marcas Femenino, mediano/Pequeño">Gav#8 Marcas Masculino, ov/semiov, acet/metal</option>
-	   <option value="Gav#7 Marcas Masculino, mediano/Pequeño">Gav#7 Marcas, Masc/Fem, med/Peq, Ov/semiov</option>
-    <option value="Gav#6 Marcas Femenino, mediano/Pequeño">Gav#6 Marcas Fem, med/grande, acetato</option>
-    <option value="Gav#5 Marcas Femenino, mediano/grande">Gav#5 Marcas Femenino, mediano/grande</option>
-    <option value="Gav#4 Marcas Femenino, Todo Tamaño">Gav#4 Marcas Femenino, Todo Tamaño</option>
-    <option value="Gav#3, Marcas Femenino, Todo Tamaño">Gav#3, Marcas Femenino, Todo Tamaño</option>
-	<option value="Gav#2 Marcas Niño">Gav#2 Marcas Niño</option>
-	<option value="AndVas niño #1">AndVas niño #1</option>
+    
 
 
             </select>
@@ -221,8 +186,6 @@
     <input type="hidden" name="id_producto" id="id_producto"/>
     <input type="hidden" name="categoria" id="categoria" value="aros"/>
     <input type="hidden" name="categoriaacc" id="categoriacc" value="null"/>
-    <input type="hidden" name="stock" id="stock" value="0"/>
-
 
     <button type="submit" id="agregar" name="agregar" class="btn btn-blue btn-block"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 Guardar</button>
@@ -291,6 +254,8 @@ var medidas = new Cleave('#medidas', {
   
 
 ?>
+
+
 
 
 

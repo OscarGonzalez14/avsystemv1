@@ -22,15 +22,15 @@
       require_once("../modelos/Pacientes.php");
       require_once("../modelos/Ventas.php");
       require_once("../modelos/Ordenes.php");
-      $categoria = new Categoria();
-      $producto = new Producto();
-      $proveedor = new Proveedor();
-      $compra = new Compras();
-      $paciente = new Paciente();
-      $venta = new Ventas();
-      $usuario = new Usuarios();
-      $orden = new Ordenes();
 
+       $categoria = new Categoria();
+       $producto = new Producto();
+       $proveedor = new Proveedor();
+       $compra = new Compras();
+       $paciente = new Paciente();
+       $venta = new Ventas();
+       $usuario = new Usuarios();
+       $orden = new Ordenes();
 
 ?>
 
@@ -182,12 +182,13 @@
          <li class="treeview">
           <a href="productos.php">
             <i class="fa fa-tasks" aria-hidden="true"></i> <span>Inventario</span>
+            <span class="pull-right-container badge bg-blue"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
-           <ul class="treeview-menu">
-              <li><a href="productos.php"><i class="fa fa-circle-o" aria-hidden="true"></i> <span>Inventario</span></a></li>
-              <li><a href="envios.php"><i class="fa fa-tasks" aria-hidden="true"></i> <span>Envios</span></a></li>
-              <li><a href="bodegas.php"><i class="fa fa-circle-o" aria-hidden="true"></i> <span>Bodegas</span></a></li>
-            </ul>
+          <ul class="treeview-menu">
+            <li><a href="bodegas.php"><i class="fa fa-circle-o"></i> Bodegas</a></li>
+            <li><a href="mov_internos.php"><i class="fa fa-circle-o"></i> Traslados Internos</a></li>
+            <li><a href="tras_suc.php"><i class="fa fa-circle-o"></i> Traslados a Sucursal</a></li>
+          </ul
          
         </li>';
 
@@ -202,11 +203,12 @@
             echo '
 
              <li class="">
-              <a href="pacientes.php">
-                <i class="fa fa-users"></i> <span>Pacientes</span>
-              </a>
-           
-            </li>';
+          <a href="pacientes.php">
+            <i class="fa fa-user" aria-hidden="true"></i> <span>Pacientes</span>
+            
+          </a>
+         
+        </li>';;
 
             }
 
@@ -244,6 +246,7 @@
          <li class="treeview">
           <a href="abonos.php">
             <i class="fa fa-usd" aria-hidden="true"></i> <span> Creditos y Cobros</span>
+             <span class="pull-right-container badge bg-blue"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
 
           <ul class="treeview-menu">
@@ -516,4 +519,9 @@
         exit();
      }
   ?>
+  
+  
+  
+  
+  
   

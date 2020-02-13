@@ -237,16 +237,13 @@ $html.="<tr class='filas'>
 		  }
 
 
-
-public function agrega_detalle_venta(){
+    public function agrega_detalle_venta(){
 
        
 	//echo json_encode($_POST['arrayCompra']);
-  $str = '';
+     $str = '';
 	$detalles = array();
 	$detalles = json_decode($_POST['arrayVenta']);
-
-
    
 	 $conectar=parent::conexion();
 
@@ -258,34 +255,25 @@ public function agrega_detalle_venta(){
 		$codProd = $v->codProd;
 		$modelo = $v->modelo;
 		$marca = $v->marca;
-    $color = $v->color;
-    $medidas = $v->medidas;
+        $color = $v->color;
+        $medidas = $v->medidas;
 		$precio_venta = $v->precio_venta; 
 		$dscto = $v->dscto;
-    $importe = $v->importe;
-    $id_ingreso = $v->id_ingreso;
-    $categoriaub = $v->categoriaub;
-		//$importe = $v->importe;
-  	//$estado = $v->estado;
+        $importe = $v->importe;
+        $id_ingreso = $v->id_ingreso;
+        $categoriaub = $v->categoriaub;
 
-		//echo "***************";
-		//echo "Cant: ".$cantidad." codProd: ".$codProd. " Producto: ". $producto. " moneda: ".$moneda. " precio: ".$precio. " descuento: ".$dscto. " estado: ".$estado;
-
-		   $numero_venta = $_POST["numero_venta"];
-		   $cod_pac = ["cod_pac"];
-		   //$paciente_nombre = $_POST["nombre"];
-		   $nombre_pac = $_POST["nombre_pac"];
-		   $tipo_pago ="Cargo Automatico";
-		   $subtotal = $_POST["subtotal"];
-		   $usuario = $_POST["usuario"];
-       $sucursal = $_POST["sucursal"];
-		   $tipo_venta = $_POST["tipo_venta"];
-       $id_usuario = $_POST["id_usuario"];
-       $id_paciente = $_POST["id_paciente"];
-       $plazo = $_POST["plazo"];
-       //$descripcion = $_POST["descripcion"];
-       //$importe = $_POST["importe"];
-		   
+		$numero_venta = $_POST["numero_venta"];
+		$cod_pac = ["cod_pac"];
+		$nombre_pac = $_POST["nombre_pac"];
+		$tipo_pago =$_POST["tipo_pago"];
+		$subtotal = $_POST["subtotal"];
+		$usuario = $_POST["usuario"];
+        $sucursal = $_POST["sucursal"];
+		$tipo_venta = $_POST["tipo_venta"];
+        $id_usuario = $_POST["id_usuario"];
+        $id_paciente = $_POST["id_paciente"];
+        $plazo = $_POST["plazo"];
 
         $sql="insert into detalle_ventas
         values(null,?,?,?,?,?,?,?,now(),?,?);";
@@ -303,9 +291,7 @@ public function agrega_detalle_venta(){
         $sql->bindValue(7,$importe);
         $sql->bindValue(8,$id_usuario);
         $sql->bindValue(9,$id_paciente);
-
-       
-       
+        
         $sql->execute();
          
 
@@ -384,7 +370,7 @@ public function agrega_detalle_venta(){
 
            $sql7=$conectar->prepare($sql7);
 
-           $sql7->bindValue(1,$importe);
+           $sql7->bindValue(1,$subtotal);
            $sql7->bindValue(2,$plazo);
            $sql7->bindValue(3,$subtotal);
            $sql7->bindValue(4,$tipo_pago);
@@ -395,7 +381,6 @@ public function agrega_detalle_venta(){
 
           
   	  }
-
 //////////////////////REGISTRAR ABONOS
 
 public function agrega_detalle_abono(){
@@ -1271,5 +1256,4 @@ public function get_producto_para_venta($id_producto,$id_ingreso){
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
-
-}
+   }

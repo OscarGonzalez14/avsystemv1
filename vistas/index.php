@@ -119,7 +119,7 @@
                 ?>
                     <div class="alert alert-danger alert-dismissible">
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <h4><i class="icon fa fa-ban"></i> Los campos estan vacios</h4>
+                      <h4><i class="icon fa fa-ban"></i> Algún campo esta vacío</h4>
                      
                 </div>
                 <?php
@@ -149,16 +149,19 @@
    <!-- <p class="text-center pad text-bold bg-primary margin-bottom">Ingrese los datos</p> -->
 
     <form action="" method="post">
-
-
-
-
-  <div class="form-group has-feedback">
+      <div class="form-group has-feedback">
         <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required="required">
-
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-
       </div>  
+
+      <div class="form-group has-feedback">
+          <select class="form-control" id="sucursal_login" name="sucursal_login">
+            <option value="">Seleccione una Sucursal...</option>
+            <option value="Metrocentro">Metrocentro</option>
+            <option value="Emresarial">Emresarial</option>
+            <option value="Santa Ana">Santa Ana</option>
+          </select>
+      </div>
 
       <div class="form-group has-feedback">
         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
