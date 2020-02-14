@@ -236,7 +236,7 @@
               </a>
 
             <ul class="treeview-menu">
-              <li><a href="ordenes.php"><i class="fa fa-circle-o"></i> Ordenes</a></li>
+              <li><a href="ordenes.php"><i class="fa fa-circle-o"></i> Envios a Lab.</a></li>
               <a href="ordenes_vencidas.php">
                 <i class="class="fa fa-circle-o" aria-hidden="true"></i><span> Ordenes Vencidas</span>
                   <span class="pull-right-container badge bg-blue">
@@ -251,7 +251,7 @@
          ?>
 
 
-          <?php if($_SESSION["ventas"]==1)
+          <?php if($_SESSION["cobros"]==1)
           {
           
           echo ' 
@@ -264,7 +264,9 @@
 
           <ul class="treeview-menu">
             <li><a href="abonos.php"><i class="fa fa-circle-o"></i> Creditos y Cobros</a></li>
-            <li><a href="control_cobros.php"><i class="fa fa-circle-o"></i> Control de Cobros</a></li>      
+             <li><a href="abono.php"><i class="fa fa-circle-o"></i> Creditos y Cobros 2</a></li>
+            <li><a href="control_cobros.php"><i class="fa fa-circle-o"></i> Control de Cobros</a></li>
+            <li><a href="orden_desc.php"><i class="fa fa-circle-o"></i> Ordenes de Descuento</a></li>       
           </ul>
          
         </li>';

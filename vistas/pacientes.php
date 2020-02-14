@@ -41,7 +41,7 @@
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">
-                            <button class="btn btn-dark btn-lg"  data-toggle="modal" data-target="#pacienteModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Paciente</button></h1>
+                            <button class="btn btn-dark btn-lg"  data-toggle="modal" data-target="#pacienteModal" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Paciente</button></h1>
                             <a href="consultas.php"><button class="btn btn-blue btn-lg"><i class="fa fa-address-card-o" aria-hidden="true"></i>
                               Consultas</button></h1></a>
                             <a href="#"><button class="btn btn-dark btn-lg"><i class="fa fa-list-alt" aria-hidden="true"></i>
@@ -90,7 +90,7 @@
     
    <!--FORMULARIO VENTANA MODAL-->
   
-<div class="modal fade" id="pacienteModal" role="dialog">
+<div class="modal fade" id="pacienteModal" data-modal-index="1">
     <div class="modal-dialog modal-lg">    
       <!-- Modal content-->
       <div class="modal-content">
@@ -100,52 +100,63 @@
         </div>
 <div class="modal-body">
 
-  <form method="post" id="paciente_form">
+  
     <div class="form-group row">
 
       <div class="col-xs-3">
        <label>Codigo de Paciente</label>
-    <input type="text" class="form-control" id="codigo" name="codigo" value="<?php $codigos=$codigo->codigo_paciente(); ?>" >
+    <input type="text" class="form-control" id="codigo_paciente" name="codigo" id="codigo"value="<?php $codigos=$codigo->codigo_paciente(); ?>" >
       </div>
 
-      <div class="col-xs-12">
+      <div class="col-xs-9">
         <label for="ex1">Nombre</label>
-        <input class="form-control" id="nombres" name="nombres" type="text" placeholder="Escriba el Nombre del paciente"  onkeyup="mayus(this);"required>
+        <input class="form-control" id="nombres" name="nombres" type="text" placeholder="Escriba el Nombre del paciente"  onkeyup="mayus(this);">
       </div>
       <div class="col-xs-3">
-        <label for="ex2">Telefono del Paciente</label>
-        <input class="form-control" id="telefono" type="text" name="telefono" required>
+        <label for="ex2">Telefono</label>
+        <input class="form-control" id="telefono" type="text" name="telefono">
       </div>
 
-      <div class="col-xs-3">
+      <div class="col-xs-2">
         <label for="ex3">Edad</label>
         <input class="form-control" id="edad" type="number" name="edad" placeholder="edad">
       </div>
 
-      <div class="col-xs-6">
-        <label for="ex3">Ocupación</label>
-        <input class="form-control" id="ocupacion" type="text" name="ocupacion" placeholder="ocupacion del paciente" onkeyup="mayus(this);">
-      </div>
-
-      <div class="col-xs-6">
+      <div class="col-xs-3">
         <label for="ex3">DUI</label>
         <input class="form-control" id="dui" type="text" name="dui" placeholder="DUI">
       </div>
 
-      <div class="col-xs-6">
+      <div class="col-xs-4">
+        <label for="ex3">Ocupación</label>
+        <input class="form-control" id="ocupacion" type="text" name="ocupacion" placeholder="ocupacion del paciente" onkeyup="mayus(this);">
+      </div>
+
+      <div class="col-xs-4">
         <label for="ex3">Correo</label>
         <input class="form-control" id="correo" type="text" name="correo" placeholder="correo del paciente">
       </div>
 
+      <div class="col-xs-7">
+        <label for="ex3">Empresa</label>
+        <input class="form-control" id="empresa" type="text" name="empresa" placeholder="correo del paciente" value="Ninguna">
+      </div>
+
+      <div class="col-xs-1">
+      <label>Buscar</label>
+      <button class="btn btn-blue btn-block" data-toggle="modal" data-target="#empresasModal"><span class="glyphicon glyphicon-search"></button>       
     </div>
 
+    </div>
+
+<input type="hidden" name="cod_emp" id="cod_emp"/>
 <input type="hidden" name="id_paciente" id="id_paciente"/>
 <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
 <input type="hidden" name="sucursal" id="sucursal" value="<?php echo $_SESSION["cedula"];?>"/>
 
 <button type="submit"  class="btn btn-primary btn-block"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 Guardar</button>
-</form>
+
 
   </div>
         <div class="modal-footer">
@@ -342,7 +353,7 @@ Guardar</button>
      </div>
 
 
-    <button type="submit" id="agregar" name="agregar" class="btn btn-blue btn-block"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+    <button type="submit" id="agregar" name="agregar" class="btn btn-blue btn-block" id="addEmpresa"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 Guardar</button>
   </form>
 
@@ -355,7 +366,63 @@ Guardar</button>
     </div>
   </div>
  <!--FIN FORMULARIO VENTANA MODAL-->
- <script type="text/javascript" src="js/cleave.js"></script>
+ <!-- Modal -->
+<div id="empresasModal" class="modal fade" data-modal-index="2">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">EMPRESAS</h4>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">        
+             <table id="lista_pacientes_data_emp" class="table table-bordered table-striped">               
+                <thead>
+                  <tr>
+                    <th >Codigo</th>          
+                    <th >Nombre</th>
+                    <th >Agregar</th>
+                  </tr>
+                </thead>               
+              </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<script>
+    $(function(){
+      $('.btn[data-toggle=modal]').on('click', function(){
+        var $btn = $(this);
+        var currentDialog = $btn.closest('.modal-dialog'),
+        targetDialog = $($btn.attr('data-target'));;
+        if (!currentDialog.length)
+          return;
+        targetDialog.data('previous-dialog', currentDialog);
+        currentDialog.addClass('aside');
+        var stackedDialogCount = $('.modal.in .modal-dialog.aside').length;
+        if (stackedDialogCount <= 5){
+          currentDialog.addClass('aside-' + stackedDialogCount);
+        }
+      });
+
+      $('.modal').on('hide.bs.modal', function(){
+        var $dialog = $(this);  
+        var previousDialog = $dialog.data('previous-dialog');
+        if (previousDialog){
+          previousDialog.removeClass('aside');
+          $dialog.data('previous-dialog', undefined);
+        }
+      });
+    })
+  </script>
+<script type="text/javascript" src="js/cleave.js"></script>
 <script>
 
 function mayus(e) {
@@ -367,6 +434,11 @@ var medidas = new Cleave('#dui', {
     blocks: [8,1],
     uppercase: true
 });
+
+$(document).on('click', '#addEmpresa', function() {
+        $('#myModal').modal('show');
+    });
+
  </script>
 
   
@@ -383,7 +455,7 @@ var medidas = new Cleave('#dui', {
 ?>
 
 <script type="text/javascript" src="js/paciente.js"></script>
-<script type="text/javascript" src="js/consultas.js"></script>
+<script type="text/javascript" src="js/empresa.js"></script>
 
 <?php
    

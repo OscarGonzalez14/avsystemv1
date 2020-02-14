@@ -27,7 +27,9 @@ function init(){
 			
 			$(".modal-title").text("Agregar Aros");
 		
-	  });	
+	  });
+
+	
 }
 
 function listarEnvio(){
@@ -108,6 +110,7 @@ function listarEnvio(){
 	       
 	}).DataTable();
 }
+
 
 ////**************LISTAR ENVIOS A SUSCURSAL***********************//////////
 function envios_sucursal(){
@@ -256,9 +259,9 @@ var filas = "";
 for(var i=0; i<detallesE.length; i++){
 	 var filas = filas + "<tr><td colspan='1'>"+(i+1)+"</td> <td name='modelo[]' colspan='2'>"+detallesE[i].modelo+"</td> <td name='marca[]' colspan='1'>" +detallesE[i].marca+"</td> <td name='color[]' colspan='2'>" +
 	 detallesE[i].color+"</td><td colspan='1'><input type='number' class='cantidad' name='cantidad[]' id=cantidad_"+i+" onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidadAjax(event, this, "+(i)+");' value='"+detallesE[i].cantidad+"'><td>"+detallesE[i].categoriaub+"</td><td><select id='ubicacion_de_destino' class='form-control form-control-success ubicaciones_destino' style='border-color: #5bc0de; border: solid 2px #5bc0de'></td></tr>";
-	}
-	$('#listProdEnvios').html(filas);      
 }
+	$('#listProdEnvios').html(filas);      
+  }
 
 function registrarTraslados(){
     
