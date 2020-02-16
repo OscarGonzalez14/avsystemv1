@@ -25,6 +25,7 @@ require_once('../modelos/Empresa.php');
 		$sub_array = array();
 	          $sub_array[] = $row["id_empresas"];
 		$sub_array[] = $row["nombre"];
+		$sub_array[] = substr($row["direccion"],0,28);
         $sub_array[] = '<button type="button" onClick="agregar_empresa_pac('.$row["id_empresas"].');" id="'.$row["id_empresas"].'" class="btn btn-edit btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>';
         $data[] = $sub_array;
 	}

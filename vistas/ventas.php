@@ -81,12 +81,12 @@
       </ul>
       </div>
     </nav>        
-
+<input class="form-control" id="sucursal_paciente" type="hidden" value="<?php echo $_SESSION["cedula"];?>">
 <div class="row"><!--Row 1-->
   <div class="col-sm-1"></div>
   <div class="col-sm-10 row1">
 
-   <div align="left"><strong><?php echo "Asesor: " . $_SESSION["cedula"]."<p align='right' id='date'></p>"; ?></strong></div>
+   <div align="left"><strong><?php echo "Asesor: " . $_SESSION["usuario"]."<p align='right' id='date'></p>"; ?></strong></div>
 
     <div class="form-group row">
 

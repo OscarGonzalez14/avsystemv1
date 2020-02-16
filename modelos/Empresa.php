@@ -30,7 +30,7 @@ class Empresa extends Conectar
 
           $conectar=parent::conexion();
           parent::set_names();
-          $sql="select id_empresas, nombre from empresas";
+          $sql="select id_empresas, nombre,direccion from empresas";
           $sql=$conectar->prepare($sql);
           $sql->execute();
 

@@ -26,19 +26,12 @@
 
 
   case "listar":
+    $datos=$consultas->get_consultas();
+ 	$data= Array();
 
-     $datos=$consultas->get_consultas();
-
-     //Vamos a declarar un array
- 	 $data= Array();
-
-     foreach($datos as $row)
-			{
-				$sub_array = array();
-
-
-
-			
+    foreach($datos as $row)
+		{
+		    $sub_array = array();			
 				//$sub_array = array();
 				$sub_array[] = '<button type="button" class="btn btn-blue detconsultas" id="'.$row["id_consulta"].'" data-toggle="modal" data-target="#detalle_consulta"><i class="fa fa-eye" aria-hidden="true"></i></i> Ver Detalles</button>';
 				$sub_array[] = $row["id_consulta"];
@@ -47,13 +40,7 @@
 				$sub_array[] = $row["nombres"];
 				$sub_array[] = $row["sugeridos"];
 				$sub_array[] = $row["diagnostico"];
-				$sub_array[] = $row["usuario"];
-
-				
-
-
-
-              
+				$sub_array[] = $row["usuario"];    
          
 			
 

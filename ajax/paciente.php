@@ -11,21 +11,10 @@
   
    $pacientes = new Paciente();
 
-   $id_usuario=isset($_POST["id_usuario"]);
-   $id_paciente=isset($_POST["id_paciente"]);
-   $codigo = isset($_POST["codigo"]);
-   $nombres=isset($_POST["nombres"]);
-   $telefono=isset($_POST["telefono"]);
-   $edad=isset($_POST["edad"]);
-   $ocupacion=isset($_POST["ocupacion"]);
-   $dui=isset($_POST["dui"]);
-   $correo=isset($_POST["correo"]);
-   $sucursal =isset($_POST["sucursal"]);
-
     switch($_GET["op"]){
 
-    case "guardaryeditar":
-		$pacientes->registrar_paciente($codigo,$nombres,$telefono,$edad,$ocupacion,$sucursal,$dui,$correo,$id_usuario);	  
+    case "guardar_paciente":
+		$pacientes->registrar_paciente($_POST["codigo_paciente"],$_POST["nombres"],$_POST["telefono"],$_POST["edad"],$_POST["ocupacion"],$_POST["sucursal"],$_POST["dui"],$_POST["correo"],$_POST["id_usuario"],$_POST["cod_empresa_pac"]);	  
     break;
 
     case 'agregaConsulta':
@@ -110,11 +99,8 @@
 				 $sub_array[] = $row["correo"];
 				 $sub_array[] = date("d-m-Y",strtotime($row["fecha_reg"]));
             
-               $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-infos btn-md"><i class="fa fa-hospital-o" aria-hidden="true"></i> Agregar Consulta</button>';
-
-                 
-                 $sub_array[] = '<button type="button" onClick="editarp('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-edit btn-md"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-                                
+               $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-infos btn-md"><i class="fa fa-hospital-o" aria-hidden="true"></i> Agregar Consulta</button>';              
+                                                
 				$data[] = $sub_array;
 			}
 
@@ -131,7 +117,7 @@
       /*se muestran en ventana modal el datatable de los pacientes en ventas para seleccionar luego los pacientes activos y luego se autocomplementa los campos de un formulario*/
      case "listar_en_ventas":
 
-     $datos=$pacientes->get_pacientes();
+     $datos=$pacientes->get_pacientes($_POST["sucursal_paciente"]);
 
      //Vamos a declarar un array
  	 $data= Array();

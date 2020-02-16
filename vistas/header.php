@@ -155,6 +155,21 @@
           
         </li>
 
+         <?php if($_SESSION["empresa"]==1)
+          {
+            echo '
+
+             <li class="">
+          <a href="empresas.php">
+            <i class="fa fa-building-o" aria-hidden="true"></i><span>Empresas</span>            
+          </a>
+         
+        </li>';
+
+            }
+
+         ?>        
+
 
          <?php if($_SESSION["pacientes"]==1)
           {
@@ -171,20 +186,27 @@
 
          ?>
 
-         <?php if($_SESSION["empresa"]==1)
+      <?php if($_SESSION["evaluaciones"]==1)
           {
             echo '
 
-             <li class="">
-          <a href="empresas.php">
-            <i class="fa fa-building-o" aria-hidden="true"></i><span>Empresas</span>            
-          </a>
-         
-        </li>';
+          <li class="treeview">
+            <a href="evaluaciones.php">
+            <i class="fa fa-user-md" aria-hidden="true"></i><span>Evaluaciones</span>  
+            <span class="pull-right-container badge bg-blue"><i class="fa fa-angle-left pull-right"></i></span>          
+            </a>         
+
+          <ul class="treeview-menu">
+          <li><a href="evaluaciones.php"><i class="fa fa-circle-o"></i> Realizar Evaluación</a></li>
+            <li><a href="ev_realizadas.php"><i class="fa fa-circle-o"></i> Evaluaciones Realizadas</a></li>
+          </ul>
+          </li>
+          ';
 
             }
 
          ?>
+
         
          <?php if($_SESSION["cotizaciones"]==1)
           {
@@ -216,7 +238,7 @@
             <li><a href="bodegas.php"><i class="fa fa-circle-o"></i> Bodegas</a></li>
             <li><a href="mov_internos.php"><i class="fa fa-circle-o"></i> Traslados Internos</a></li>
             <li><a href="tras_suc.php"><i class="fa fa-circle-o"></i> Traslados a Sucursal</a></li>
-          </ul
+          </ul>
          
         </li>';
 
@@ -232,7 +254,7 @@
             echo '
              <li class="treeview">
               <a href="ordenes.php">
-               <i class="fa fa-file-o" aria-hidden="true"></i><span>Ordenes</span>
+               <i class="fa fa-file-o" aria-hidden="true"></i><span>Envios a Lab.</span>
               </a>
 
             <ul class="treeview-menu">
@@ -264,7 +286,6 @@
 
           <ul class="treeview-menu">
             <li><a href="abonos.php"><i class="fa fa-circle-o"></i> Creditos y Cobros</a></li>
-             <li><a href="abono.php"><i class="fa fa-circle-o"></i> Creditos y Cobros 2</a></li>
             <li><a href="control_cobros.php"><i class="fa fa-circle-o"></i> Control de Cobros</a></li>
             <li><a href="orden_desc.php"><i class="fa fa-circle-o"></i> Ordenes de Descuento</a></li>       
           </ul>
@@ -331,40 +352,7 @@
 
      ?>
 
-
-       <?php if($_SESSION["reporte_compras"]==1)
-          {
-
-          echo '
-
-       <li class="treeview">
-          <a href="reporte_compras.php">
-            <i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Reportes de Ingresos</span>
-            <span class="pull-right-container badge bg-blue">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-
-          <ul class="treeview-menu">
-          <li><a href="reporte_general_compras.php"><i class="fa fa-circle-o"></i>Reporte General de Ingresos</a></li>
-            <li><a href="reporte_general_compras.php"><i class="fa fa-circle-o"></i>Reporte General de Ingresos</a></li>
-            
-            <li><a href="reporte_compras_mensual.php"><i class="fa fa-circle-o"></i> Reporte Mensual Ingresos</a></li>
-
-            <li><a href="reporte_compras_proveedor.php"><i class="fa fa-circle-o"></i> Reporte Compras a Laboratorio</a></li>
-
-
-          </ul>
-         
-        </li>';
-       
-       }
-
-     ?>
-
-  
-
-       <?php if($_SESSION["usuarios"]==1)
+<?php if($_SESSION["usuarios"]==1)
           {
 
             echo ' 

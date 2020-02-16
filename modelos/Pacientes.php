@@ -8,16 +8,16 @@ class Paciente extends Conectar
 
 public function get_pacientes($sucursal_paciente){
 
-          $conectar=parent::conexion();
-          parent::set_names();
+  $conectar=parent::conexion();
+  parent::set_names();
 
-          $sql="select*from pacientes where sucursal=? order by id_paciente DESC";
+  $sql="select*from pacientes where sucursal=? order by id_paciente DESC";
 
-          $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$sucursal_paciente);
-          $sql->execute();
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$sucursal_paciente);
+  $sql->execute();
 
-          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
        }
 
 public function codigo_paciente(){
@@ -46,15 +46,15 @@ public function codigo_paciente(){
 }
 
   
-public function registrar_paciente($codigo,$nombres,$telefono,$edad,$ocupacion,$sucursal,$dui,$correo,$id_usuario){
+public function registrar_paciente($codigo_paciente,$nombres,$telefono,$edad,$ocupacion,$sucursal,$dui,$correo,$id_usuario,$cod_empresa_pac){
 
       $conectar= parent::conexion();
       parent::set_names();
-      $sql="insert into pacientes values(null,?,?,?,?,?,?,?,?,null,?);";
+      $sql="insert into pacientes values(null,?,?,?,?,?,?,?,?,null,?,?);";
           
         $sql=$conectar->prepare($sql);
 
-        $sql->bindValue(1, $_POST["codigo"]);
+        $sql->bindValue(1, $_POST["codigo_paciente"]);
         $sql->bindValue(2, $_POST["nombres"]);
         $sql->bindValue(3, $_POST["telefono"]);
         $sql->bindValue(4, $_POST["edad"]);
@@ -63,6 +63,7 @@ public function registrar_paciente($codigo,$nombres,$telefono,$edad,$ocupacion,$
         $sql->bindValue(7, $_POST["dui"]);
         $sql->bindValue(8, $_POST["correo"]);
         $sql->bindValue(9, $_POST["id_usuario"]);
+        $sql->bindValue(10, $_POST["cod_empresa_pac"]);
         $sql->execute();
       
 }

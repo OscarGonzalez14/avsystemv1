@@ -179,24 +179,25 @@ function mostrarc(id_paciente)
 
 
 function guardarPaciente(){
-	var  =$("#").val();
-    var  =$("#").val();
-    var  =$("#").val();
-	var  =$("#").val();
-	var  =$("#").val();
-	var  =$("#").val();
-	var  =$("#").val();
-	var  =$("#").val();
-	var  =$("#").val();
-	var  =$("#").val();    
+	var codigo_paciente =$("#codigo_paciente").val();
+    var nombres=$("#nombres").val();
+    var telefono=$("#telefono").val();
+	var edad=$("#edad").val();
+	var dui=$("#dui").val();
+	var ocupacion =$("#ocupacion").val();
+	var correo=$("#correo").val();
+	var empresa=$("#empresa").val();
+	var cod_empresa_pac=$("#cod_emp").val();
+	var id_usuario=$("#id_usuario").val();    
+	var sucursal = $("#sucursal").val();
     
 
     //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
-if(nombre_emp != "" ){
+if(nombres != "" || telefono != "" || edad != "" || dui != "" || correo != "" || empresa != ""){
     $.ajax({
-    url:"../ajax/empresa.php?op=guardar_empresa",
+    url:"../ajax/paciente.php?op=guardar_paciente",
     method:"POST",
-    data:{nombre_emp:nombre_emp,telefono_emp:telefono_emp,direccion_emp:direccion_emp,nit_emp:nit_emp,responsable:responsable,user_emp:user_emp,pass_emp:pass_emp,correo_emp:correo_emp,user_reg:user_reg},
+    data:{codigo_paciente:codigo_paciente,nombres:nombres,telefono:telefono,edad:edad,ocupacion:ocupacion,sucursal:sucursal,dui:dui,correo:correo,id_usuario:id_usuario,cod_empresa_pac:cod_empresa_pac},
     cache: false,
     dataType:"html",
     error:function(x,y,z){
@@ -206,17 +207,16 @@ if(nombre_emp != "" ){
     },        
       
   success:function(data){
-  setTimeout ("bootbox.alert('Se ha Registrado la empresa con exito');", 100);
+  setTimeout ("bootbox.alert('Se ha registrado el Paciente con exito');", 100);
   //refresca la pagina, se llama a la funtion explode
   setTimeout ("explode();", 2000);          
 }
 
-  }); 
-
-  }else{
-    bootbox.alert("El campo nombre empresa es obligatorio!!");
+}); 
+}else{
+    bootbox.alert("Algun campo obligatorio no fue llenado");
     return false;
-  } //cierre del condicional de validacion de los campos del paciente
+} //cierre del condicional de validacion de los campos del paciente
   
     
 }
@@ -304,6 +304,8 @@ function editarp(id_paciente)
     //Función Listar
 function listar_en_ventas(){
 
+	var sucursal_paciente = $('#sucursal_paciente').val();
+
 	tabla_en_ventas=$('#lista_pacientes_data').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
@@ -318,8 +320,9 @@ function listar_en_ventas(){
 		"ajax":
 				{
 					url: '../ajax/paciente.php?op=listar_en_ventas',
-					type : "get",
-					dataType : "json",						
+					type : "post",
+					//dataType : "json",
+					data:{sucursal_paciente:sucursal_paciente},					
 					error: function(e){
 						console.log(e.responseText);	
 					}
